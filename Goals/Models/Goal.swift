@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Target {
+struct Goal {
     let name: String
     let discription: String
     let days: Int

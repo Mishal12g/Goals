@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		87C9D17B2ABF6D4F00222C53 /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17A2ABF6D4F00222C53 /* Target.swift */; };
-		87C9D17E2ABF6E8E00222C53 /* FactoryTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17D2ABF6E8E00222C53 /* FactoryTarget.swift */; };
-		87C9D1802ABF6F6700222C53 /* TargetModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17F2ABF6F6700222C53 /* TargetModelView.swift */; };
+		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
+		87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17A2ABF6D4F00222C53 /* Goal.swift */; };
+		87C9D17E2ABF6E8E00222C53 /* GoalFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */; };
 		87DE1E9A2ABDB90400B539CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE1E992ABDB90400B539CB /* AppDelegate.swift */; };
 		87DE1E9C2ABDB90400B539CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE1E9B2ABDB90400B539CB /* SceneDelegate.swift */; };
 		87DE1E9E2ABDB90400B539CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE1E9D2ABDB90400B539CB /* ViewController.swift */; };
@@ -19,9 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		87C9D17A2ABF6D4F00222C53 /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
-		87C9D17D2ABF6E8E00222C53 /* FactoryTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryTarget.swift; sourceTree = "<group>"; };
-		87C9D17F2ABF6F6700222C53 /* TargetModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetModelView.swift; sourceTree = "<group>"; };
+		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
+		87C9D17A2ABF6D4F00222C53 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFactory.swift; sourceTree = "<group>"; };
 		87DE1E962ABDB90400B539CB /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87DE1E992ABDB90400B539CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		87DE1E9B2ABDB90400B539CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,8 +65,8 @@
 		87C9D1792ABF6D3700222C53 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				87C9D17A2ABF6D4F00222C53 /* Target.swift */,
-				87C9D17F2ABF6F6700222C53 /* TargetModelView.swift */,
+				87C9D17A2ABF6D4F00222C53 /* Goal.swift */,
+				870708E32AC2E32300B8D016 /* GoalModelView.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 		87C9D17C2ABF6E7200222C53 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				87C9D17D2ABF6E8E00222C53 /* FactoryTarget.swift */,
+				87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -180,11 +180,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				87DE1E9E2ABDB90400B539CB /* ViewController.swift in Sources */,
-				87C9D1802ABF6F6700222C53 /* TargetModelView.swift in Sources */,
 				87DE1E9A2ABDB90400B539CB /* AppDelegate.swift in Sources */,
-				87C9D17B2ABF6D4F00222C53 /* Target.swift in Sources */,
+				870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */,
+				87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */,
 				87DE1E9C2ABDB90400B539CB /* SceneDelegate.swift in Sources */,
-				87C9D17E2ABF6E8E00222C53 /* FactoryTarget.swift in Sources */,
+				87C9D17E2ABF6E8E00222C53 /* GoalFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
