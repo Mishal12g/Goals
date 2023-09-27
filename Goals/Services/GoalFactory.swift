@@ -19,18 +19,22 @@ protocol GoalFactoryDelegate {
 
 final class GoalFactory: GoalFactoryProtocol {
     
-    var goals: [Goal] = [Goal(name: "Run",
-                                      discription: "evry day run",
-                                      days: 21,
+    var goals: [Goal] = [Goal(name: "диета 30 дней",
+                                      discription: "в",
+                                      days: 30,
                                       state: .isNotDone),
-                                 Goal(name: "read biblie",
+                                 Goal(name: "Читать библию",
                                       discription: "read",
                                       days: 7,
                                       state: .isCurrent),
-                                 Goal(name: "Proger",
+                                 Goal(name: "Занятия по программированию",
                                       discription: "learning",
                                       days: 2,
-                                      state: .isNotDone)]
+                                      state: .isNotDone),
+                                 Goal(name: "Пробежка на 21 день",
+                                      discription: "",
+                                      days: 21,
+                                      state: .isCurrent)]
     
     private var delegate: GoalFactoryDelegate?
     

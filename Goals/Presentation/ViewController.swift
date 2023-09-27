@@ -8,17 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GoalFactoryDelegate{
-
     
-
     //MARK: Privaties property
     private var countButtons: Int = 0 // Укажите нужное количество кнопок
     private let buttonCellIdentifier = "ButtonCell"
     private var goalFactory: GoalFactoryProtocol?
     private var currentGoal: Goal?
     private var dayStr: String?
-    private var index = -1
-    private let indexTotal = 3
+    private var index = 0
     
     //MARK: IBOutlets
     @IBOutlet weak var goalsIndexLabel: UILabel!
@@ -33,6 +30,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         goalFactory = GoalFactory(delegate: self)
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
+        goalFactory?.backStepGoal(index: index)
     }
     //MARK: IBActions methods
     @IBAction func onRightButton(_ sender: Any) {
@@ -45,6 +43,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBAction func onLeftButton(_ sender: Any) {
         index = max(index - 1, 0)
         goalFactory?.backStepGoal(index: index)
+        
     }
     
     @IBAction func onDoneButten(_ sender: Any) {
@@ -66,17 +65,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
-                                      dayStr: String(goal.days),
-                                      stateColor: goal.state == .isCurrent ? .gray : .blue)
-        countButtons = goal.days
+                                      days: goal.days,
+                                      dayStr: goal.discription,
+                                      stateColor: goal.state == .isCurrent ? .gray : .green)
         
         return modelView
     }
     
     func show(_ modelView: GoalModelView) {
+        guard let goalFactory = goalFactory else { return }
+        let indexTotal = goalFactory.goals.count
+        
         goalNameLabel.text = modelView.name
         goalsIndexLabel.text = "\(index + 1) / \(indexTotal) "
-            
+        countButtons = modelView.days
+
+        setupCollectionView()
     }
     
     
@@ -108,7 +112,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         cell.button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             
         cell.button.setTitle("\(dayStr ?? "") \(indexPath.item + 1)", for: .normal)
-
+        
         return cell
     }
     
