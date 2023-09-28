@@ -173,6 +173,10 @@
                                         <rect key="frame" x="0.0" y="56" width="353" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <action selector="onGoalTextField:" destination="guT-hw-s4R" eventType="editingChanged" id="IoO-a5-wZa"/>
+                                            <action selector="onGoalTextField:" destination="guT-hw-s4R" eventType="editingDidEnd" id="L1e-YO-d63"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="На сколько дней:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXV-Yc-OYH">
                                         <rect key="frame" x="0.0" y="116" width="353" height="36"/>
@@ -184,6 +188,10 @@
                                         <rect key="frame" x="0.0" y="172" width="353" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <action selector="onDaysTextField:" destination="guT-hw-s4R" eventType="editingDidEnd" id="UE9-66-xOz"/>
+                                            <action selector="onDaysTextField:" destination="guT-hw-s4R" eventType="editingChanged" id="t3C-g7-JH0"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MwG-5Z-wTk">
                                         <rect key="frame" x="0.0" y="232" width="353" height="68"/>
@@ -221,7 +229,7 @@
                         <outlet property="dayFormField" destination="VvO-t7-kRw" id="tUT-to-9fv"/>
                         <outlet property="doneButton" destination="MwG-5Z-wTk" id="n6I-5D-BXk"/>
                         <outlet property="goalDaysLabel" destination="CXV-Yc-OYH" id="Vpk-jE-tAv"/>
-                        <outlet property="goalFormField" destination="D5N-QW-Dm9" id="fpc-JU-YU7"/>
+                        <outlet property="goalFormField" destination="D5N-QW-Dm9" id="Ef0-Qk-ClD"/>
                         <outlet property="goalLabel" destination="Zz9-BF-K3c" id="bWL-o6-feV"/>
                     </connections>
                 </viewController>

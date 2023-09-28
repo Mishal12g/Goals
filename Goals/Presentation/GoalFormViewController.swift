@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 protocol GoalFormDelegate {
     
 }
@@ -20,15 +21,64 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate {
     
     //MARK: - Overrides Methods
     override func viewDidLoad() {
+        super.viewDidLoad()
+        validationBoarderGoalTextField(false)
+        validationBoarderDayTextField(false)
         initSetup()
     }
     
     //MARK: - IB Action
+    //MARK: - Text Fields
+    @IBAction func onGoalTextField(_ sender: Any) {
+        if goalFormField.text?.isEmpty == true {
+            validationBoarderGoalTextField(true)
+        } else {
+            validationBoarderGoalTextField(false)
+        }
+    }
+    
+    @IBAction func onDaysTextField(_ sender: Any) {
+        if dayFormField.text?.isEmpty == true {
+            validationBoarderDayTextField(true)
+        } else {
+            validationBoarderDayTextField(false)
+        }
+    }
+    
+    //MARK: - Buttons
     @IBAction func onDoneButton(_ sender: Any) {
-        guard let numDays = dayFormField.text else { return }
-        guard let text = goalFormField.text else { return }
-        GoalFactory.instance.addNewGoal(name: text,
-                                        days: Int(numDays) ?? 0)
+        if goalFormField.text?.isEmpty == true {
+            validationBoarderGoalTextField(true)
+            return
+        } else if dayFormField.text?.isEmpty == true {
+            validationBoarderDayTextField(true)
+            return
+        } else {
+            
+            validationBoarderGoalTextField(false)
+            validationBoarderDayTextField(false)
+            
+            guard let numDays = dayFormField.text else { return }
+            guard let text = goalFormField.text else { return }
+            GoalFactory.instance.addNewGoal(name: text,
+                                            days: Int(numDays) ?? 0)
+            
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    
+    //MARK: - Validadion
+    private func validationBoarderGoalTextField(_ isEmpty: Bool) {
+        goalFormField.layer.borderWidth = 1
+        goalFormField.layer.cornerRadius = 5
+        goalFormField.layer.borderColor = isEmpty ? UIColor.red.cgColor : UIColor.gray.cgColor
+    }
+    
+    private func validationBoarderDayTextField(_ isEmpty: Bool) {
+        dayFormField.layer.borderWidth = 1
+        dayFormField.layer.cornerRadius = 5
+        dayFormField.layer.borderColor = isEmpty ? UIColor.red.cgColor : UIColor.gray.cgColor
     }
     
     //MARK: - Privates Methods
