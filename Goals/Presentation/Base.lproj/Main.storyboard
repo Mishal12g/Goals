@@ -198,6 +198,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onDoneButton:" destination="guT-hw-s4R" eventType="touchUpInside" id="Ipw-A0-Bj8"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

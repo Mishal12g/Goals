@@ -6,8 +6,11 @@
 //
 
 import UIKit
+protocol GoalFormDelegate {
+    
+}
 
-final class GoalFormViewController: UIViewController {
+final class GoalFormViewController: UIViewController, GoalFormDelegate {
     //MARK: - IB Outlets
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalDaysLabel: UILabel!
@@ -15,12 +18,21 @@ final class GoalFormViewController: UIViewController {
     @IBOutlet weak var dayFormField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
+    //MARK: - Overrides Methods
     override func viewDidLoad() {
         initSetup()
     }
     
+    //MARK: - IB Action
+    @IBAction func onDoneButton(_ sender: Any) {
+        guard let numDays = dayFormField.text else { return }
+        guard let text = goalFormField.text else { return }
+        GoalFactory.instance.addNewGoal(name: text,
+                                        days: Int(numDays) ?? 0)
+    }
     
-    func initSetup() {
+    //MARK: - Privates Methods
+    private func initSetup() {
         goalLabel.text = "Цель"
         goalLabel.font = UIFont.boldSystemFont(ofSize: 25)
         goalLabel.numberOfLines = 2

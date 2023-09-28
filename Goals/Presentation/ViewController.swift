@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GoalFactoryDelegate{
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GoalFactoryDelegate {
     //MARK: - IB Outlets
     @IBOutlet weak var goalsIndexLabel: UILabel!
     @IBOutlet weak var goalNameLabel: UILabel!
@@ -16,7 +16,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: - Privates property
     private var countButtons: Int = 0 // Укажите нужное количество кнопок
     private let buttonCellIdentifier = "ButtonCell"
-    private var goalFactory: GoalFactoryProtocol?
+    private let goalFactory = GoalFactory.instance
     private var currentGoal: Goal?
     private var dayStr: String?
     private var index = 0
@@ -24,23 +24,22 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        goalFactory = GoalFactory(delegate: self)
+        goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
-        goalFactory?.backStepGoal(index: index)
+        goalFactory.backStepGoal(index: index)
     }
     
     //MARK: - IB Actions methods
     @IBAction func onRightButton(_ sender: Any) {
-        guard let goalFactory = goalFactory else { return }
         
-        index = min(index + 1, goalFactory.goals.count - 1)
+        index = min(index + 1, goalFactory.goalsCount - 1)
         goalFactory.nextStepGoal(index: index)
     }
     
     @IBAction func onLeftButton(_ sender: Any) {
         index = max(index - 1, 0)
-        goalFactory?.backStepGoal(index: index)
+        goalFactory.backStepGoal(index: index)
         
     }
     
@@ -63,8 +62,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func show(_ modelView: GoalModelView) {
-        guard let goalFactory = goalFactory else { return }
-        let indexTotal = goalFactory.goals.count
+        let indexTotal = goalFactory.goalsCount
         
         goalNameLabel.text = modelView.name
         goalsIndexLabel.text = "\(index + 1) / \(indexTotal) "
