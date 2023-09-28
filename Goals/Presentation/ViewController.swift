@@ -8,8 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, GoalFactoryDelegate{
+    //MARK: - IB Outlets
+    @IBOutlet weak var goalsIndexLabel: UILabel!
+    @IBOutlet weak var goalNameLabel: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    //MARK: Privaties property
+    //MARK: - Privates property
     private var countButtons: Int = 0 // Укажите нужное количество кнопок
     private let buttonCellIdentifier = "ButtonCell"
     private var goalFactory: GoalFactoryProtocol?
@@ -17,14 +21,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     private var dayStr: String?
     private var index = 0
     
-    //MARK: IBOutlets
-    @IBOutlet weak var goalsIndexLabel: UILabel!
-    @IBOutlet weak var goalNameLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var daysTextField: UITextField!
-    @IBOutlet weak var goalTextField: UITextField!
-    
-    //MARK: Overrides methods
+    //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
         goalFactory = GoalFactory(delegate: self)
@@ -32,7 +29,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         goalsIndexLabel.text = nil
         goalFactory?.backStepGoal(index: index)
     }
-    //MARK: IBActions methods
+    
+    //MARK: - IB Actions methods
     @IBAction func onRightButton(_ sender: Any) {
         guard let goalFactory = goalFactory else { return }
         
@@ -46,16 +44,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
     }
     
-    @IBAction func onDoneButten(_ sender: Any) {
-        
-        daysTextField.resignFirstResponder()
-        goalTextField.resignFirstResponder()
-        setupCollectionView()
-    }
-    
-    //MARK: Public Methods
-    
-    //MARK: GoalFactoryDelegate
+    //MARK: - Public Methods
+    //MARK: - GoalFactoryDelegate
     func didReceiveNextGoal(goal: Goal?) {
         guard let goal = goal else { return }
         
@@ -84,7 +74,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     
-    //MARK: SETUP COLLECTIONVIEW BUTTONS
+    //MARK: - SETUP COLLECTIONVIEW BUTTONS
     func setupCollectionView() {
         // Настройте UICollectionViewFlowLayout для сетки
         let layout = UICollectionViewFlowLayout()
