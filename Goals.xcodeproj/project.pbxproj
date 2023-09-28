@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
+		8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938A2AC597B200A46259 /* GoalFormViewController.swift */; };
 		87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17A2ABF6D4F00222C53 /* Goal.swift */; };
 		87C9D17E2ABF6E8E00222C53 /* GoalFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */; };
 		87DE1E9A2ABDB90400B539CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DE1E992ABDB90400B539CB /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
+		8795938A2AC597B200A46259 /* GoalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormViewController.swift; sourceTree = "<group>"; };
 		87C9D17A2ABF6D4F00222C53 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFactory.swift; sourceTree = "<group>"; };
 		87DE1E962ABDB90400B539CB /* Goals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Goals.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +50,7 @@
 			children = (
 				87DE1E9D2ABDB90400B539CB /* ViewController.swift */,
 				87DE1E9F2ABDB90400B539CB /* Main.storyboard */,
+				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87DE1E9E2ABDB90400B539CB /* ViewController.swift in Sources */,
+				8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */,
 				87DE1E9A2ABDB90400B539CB /* AppDelegate.swift in Sources */,
 				870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */,
 				87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */,
