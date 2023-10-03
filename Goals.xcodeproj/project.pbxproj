@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
+		876969B82AC7015B00EE868A /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876969B72AC7015B00EE868A /* ButtonCollectionViewCell.swift */; };
 		8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938A2AC597B200A46259 /* GoalFormViewController.swift */; };
 		8795938D2AC5BE8700A46259 /* GoalFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938C2AC5BE8700A46259 /* GoalFactoryProtocol.swift */; };
 		87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17A2ABF6D4F00222C53 /* Goal.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
+		876969B72AC7015B00EE868A /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		8795938A2AC597B200A46259 /* GoalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormViewController.swift; sourceTree = "<group>"; };
 		8795938C2AC5BE8700A46259 /* GoalFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFactoryProtocol.swift; sourceTree = "<group>"; };
 		87C9D17A2ABF6D4F00222C53 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		876969B62AC7011F00EE868A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				876969B72AC7015B00EE868A /* ButtonCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		87C9D1772ABF67D700222C53 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +114,7 @@
 		87DE1E982ABDB90400B539CB /* Goals */ = {
 			isa = PBXGroup;
 			children = (
+				876969B62AC7011F00EE868A /* View */,
 				87C9D17C2ABF6E7200222C53 /* Services */,
 				87C9D1792ABF6D3700222C53 /* Models */,
 				87C9D1772ABF67D700222C53 /* Presentation */,
@@ -192,6 +203,7 @@
 				870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */,
 				87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */,
 				87DE1E9C2ABDB90400B539CB /* SceneDelegate.swift in Sources */,
+				876969B82AC7015B00EE868A /* ButtonCollectionViewCell.swift in Sources */,
 				87C9D17E2ABF6E8E00222C53 /* GoalFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

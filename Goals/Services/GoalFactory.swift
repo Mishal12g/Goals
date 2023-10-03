@@ -15,7 +15,7 @@ final class GoalFactory {
     
     //MARK: - Public properties
     static var instance: GoalFactory = GoalFactory()
-   
+    
     var goalsCount: Int {
         get {
             goals.count
@@ -24,22 +24,15 @@ final class GoalFactory {
     
     //MARK: - Privates properties
     var viewControllerDelegate: GoalFactoryDelegate?
-    private var goals: [Goal] = [Goal(name: "диета 30 дней",
-                                      discription: "в",
-                                      days: 30,
-                                      state: .isNotDone),
-                                 Goal(name: "Читать",
-                                      discription: "read",
-                                      days: 7,
-                                      state: .isCurrent),
-                                 Goal(name: "Занятия по программированию",
-                                      discription: "learning",
-                                      days: 2,
-                                      state: .isNotDone),
-                                 Goal(name: "Пробежка на 21 день",
-                                      discription: "",
-                                      days: 21,
-                                      state: .isCurrent)]
+    private var goals: [Goal] = [  Goal(name: "Читать",
+                                        discription: "read",
+                                        days: [Day(discription: "sdasdas"), Day(discription: ""),Day(state: .isDone, discription: "")]),
+                                   Goal(name: "Занятия по программированию",
+                                        discription: "learning",
+                                        days:[Day(discription: ""), Day(discription: ""),Day(discription: ""),Day(discription: "")]),
+                                   Goal(name: "Пробежка на 21 день",
+                                        discription: "",
+                                        days: [Day(state: .isDone, discription: ""),Day( discription: "")])]
     
     //MARK: Public methods
     func nextStepGoal(index: Int) {
@@ -53,7 +46,6 @@ final class GoalFactory {
     }
     
     func addNewGoal(name goalString: String, days countDays: Int) {
-        goals.append(Goal(name: goalString, discription: "", days: countDays, state: .isCurrent))
         viewControllerDelegate?.didReceiveNextGoal(goal: goals.last)
     }
 }

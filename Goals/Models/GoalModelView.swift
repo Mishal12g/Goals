@@ -9,7 +9,6 @@ import UIKit
 
 struct GoalModelView {
     let name: String
-    let days: Int
-    let dayStr: String
-    let stateColor: UIColor
+    let description: String
+    let days: [Day]
 }
