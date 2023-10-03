@@ -67,11 +67,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: collectionView.frame.size.width/3.5,
                                  height: collectionView.frame.size.width/3.5)
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .gray
         collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
