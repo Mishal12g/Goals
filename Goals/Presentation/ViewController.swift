@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, GoalFactoryDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GoalFactoryDelegate {
     
     //MARK: - IB Outlets
     @IBOutlet weak var goalsIndexLabel: UILabel!
@@ -15,7 +15,6 @@ class ViewController: UIViewController, GoalFactoryDelegate {
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: - Privates property
-    private let buttonCellIdentifier = "Cell"
     private let goalFactory = GoalFactory.instance
     private var index = 0
     
@@ -26,6 +25,7 @@ class ViewController: UIViewController, GoalFactoryDelegate {
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
         goalFactory.backStepGoal(index: index)
+        setupCollectionView()
     }
     
     //MARK: - IB Actions methods
@@ -60,6 +60,31 @@ class ViewController: UIViewController, GoalFactoryDelegate {
     func show(_ modelView: GoalModelView) {
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
+    }
+    
+    //MARK: - Setup collection view
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: collectionView.frame.size.width/3.5,
+                                 height: collectionView.frame.size.width/3.5)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        collectionView.collectionViewLayout = layout
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.backgroundColor = .gray
+        collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+    }
+    
+    //MARK: - Collection View
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 50
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCollectionViewCell
+        
+        cell?.button.backgroundColor = .black
+        return cell ?? UICollectionViewCell()
     }
 }
 
