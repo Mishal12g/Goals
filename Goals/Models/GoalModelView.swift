@@ -10,5 +10,5 @@ import UIKit
 struct GoalModelView {
     let name: String
     let description: String
-    let days: [Day]
+    let days: [Day?]
 }

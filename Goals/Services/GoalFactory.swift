@@ -25,7 +25,8 @@ final class GoalFactory {
     
     //MARK: - Privates properties
     var viewControllerDelegate: GoalFactoryDelegate?
-    private var goals: [Goal] {
+    //TODO: Исправить ошибку с нулевым значением.
+    private var goals: [Goal?] {
         get {
             statistic.goals ?? []
         }
@@ -43,8 +44,17 @@ final class GoalFactory {
     }
     
     func addNewGoal(name goalString: String, days countDays: Int) {
-        statistic.store(goals: goals)
+        statistic.store(goals: [Goal(name: goalString, discription: "dsa", days: addDays(countDays) )])
         print(statistic.goals ?? "")
-        viewControllerDelegate?.didReceiveNextGoal(goal: goals.last)
+        viewControllerDelegate?.didReceiveNextGoal(goal: goals.first ?? nil)
+    }
+    
+    func addDays(_ num: Int) -> [Day?] {
+        var array: [Day] = []
+        for _ in 1...num {
+            array.append(Day())
+        }
+        
+        return array
     }
 }

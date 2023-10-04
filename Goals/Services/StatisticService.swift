@@ -47,8 +47,8 @@ final class StatisticService {
     }
     
     func store(goals: [Goal]) {
-        let current = self.goals
-        self.goals = current ?? [] + goals
+        guard let current = self.goals else { return }
+        self.goals = current + goals
     }
     
     private enum Keys: String {

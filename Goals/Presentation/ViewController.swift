@@ -17,7 +17,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
     private var index = 0
-    private var days: [Day] = []
+    private var days: [Day?] = []
     
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -25,21 +25,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
-        goalFactory.backStepGoal(index: index)
+        if goalFactory.goalsCount != 0 {
+            goalFactory.backStepGoal(index: index)
+        }
         setupCollectionView()
     }
     
     //MARK: - IB Actions methods
     @IBAction func onRightButton(_ sender: Any) {
-        index = min(index + 1, goalFactory.goalsCount - 1)
-        goalFactory.nextStepGoal(index: index)
-        collectionView.reloadData()
+        if goalFactory.goalsCount != 0 {
+            index = min(index + 1, goalFactory.goalsCount - 1)
+            goalFactory.nextStepGoal(index: index)
+            collectionView.reloadData()
+        }
     }
     
     @IBAction func onLeftButton(_ sender: Any) {
-        index = max(index - 1, 0)
-        goalFactory.backStepGoal(index: index)
-        collectionView.reloadData()
+        if goalFactory.goalsCount != 0 {
+            index = max(index - 1, 0)
+            goalFactory.backStepGoal(index: index)
+            collectionView.reloadData()
+        }
     }
     
     //MARK: Privates Methods
@@ -55,7 +61,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
         goalNameLabel.text = modelView.name
-        days = modelView.days
+        days = modelView.days 
     }
     
     //MARK: - Setup collection view
@@ -74,7 +80,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: Delegates
     //MARK: - GoalFactoryDelegate
     func didReceiveNextGoal(goal: Goal?) {
-        guard let goal = goal else { return }
+        guard let goal = goal else {
+            goalNameLabel.text = "Нет Целей"
+            return
+        }
         
         show(convert(goal: goal))
     }
@@ -91,13 +100,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         cell.label.font = .boldSystemFont(ofSize: 40)
         
-        switch days[indexPath.item].state {
+        switch days[indexPath.item]?.state {
         case .isNotDone:
             cell.backgroundColor = .black
         case .isDone:
             cell.backgroundColor = .green
         case .isCurrent:
             cell.backgroundColor = .blue
+        case .none:
+            cell.backgroundColor = .red
         }
         
         cell.label.text = "\(indexPath.row + 1)"
@@ -108,7 +119,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
-        days[indexPath.item].state = .isDone
+        days[indexPath.item]?.state = .isDone
         collectionView.reloadData()
     }
 }

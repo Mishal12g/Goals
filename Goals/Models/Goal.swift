@@ -10,7 +10,7 @@ import Foundation
 struct Goal: Codable {
     let name: String
     let discription: String
-    let days: [Day]
+    let days: [Day?]
    
 }
 
@@ -18,7 +18,7 @@ struct Day: Codable {
     var state: TargetState
     let discription: String?
     
-    init(state: TargetState = .isNotDone, discription: String?) {
+    init(state: TargetState = .isNotDone, discription: String = "") {
         self.state = state
         self.discription = discription
     }
