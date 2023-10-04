@@ -40,16 +40,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalFactory.backStepGoal(index: index)
         
     }
-    
-    //MARK: - Public Methods
-    //MARK: - GoalFactoryDelegate
-    func didReceiveNextGoal(goal: Goal?) {
-        guard let goal = goal else { return }
-        
-        show(convert(goal: goal))
-    }
-    
-    func convert(goal: Goal) -> GoalModelView {
+
+    //MARK: Privates Methods
+    private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
                                       description: goal.discription,
                                       days: goal.days)
@@ -57,7 +50,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return modelView
     }
     
-    func show(_ modelView: GoalModelView) {
+   private func show(_ modelView: GoalModelView) {
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
     }
@@ -75,7 +68,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
-    //MARK: - Collection View
+    //MARK: Delegates
+    //MARK: - GoalFactoryDelegate
+    func didReceiveNextGoal(goal: Goal?) {
+        guard let goal = goal else { return }
+        
+        show(convert(goal: goal))
+    }
+    
+    //MARK: - Collection View delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 50
     }
@@ -84,7 +85,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? LabelCollectionViewCell else {
             return LabelCollectionViewCell()
         }
-        //        cell.button.setTitle("\(indexPath.row + 1)", for: .normal)
+        
         cell.label.font = .boldSystemFont(ofSize: 40)
         cell.backgroundColor = .black
         cell.label.text = "\(indexPath.row + 1)"
@@ -96,5 +97,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
     }
+    
 }
 
