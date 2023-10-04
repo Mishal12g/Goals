@@ -12,7 +12,8 @@ protocol GoalFactoryDelegate {
 }
 
 final class GoalFactory {
-    
+    let statistic = StatisticService()
+
     //MARK: - Public properties
     static var instance: GoalFactory = GoalFactory()
     
@@ -24,15 +25,11 @@ final class GoalFactory {
     
     //MARK: - Privates properties
     var viewControllerDelegate: GoalFactoryDelegate?
-    private var goals: [Goal] = [  Goal(name: "Читать",
-                                        discription: "read",
-                                        days: [Day(discription: "sdasdas"), Day(discription: "sdasdas"), Day(discription: "sdasdas"), Day(discription: ""),Day(discription: "")]),
-                                   Goal(name: "Занятия по программированию",
-                                        discription: "learning",
-                                        days:[Day(discription: ""), Day(discription: ""),Day(discription: ""),Day(discription: "")]),
-                                   Goal(name: "Пробежка на 21 день",
-                                        discription: "",
-                                        days: [Day(state: .isDone, discription: ""),Day( discription: "")])]
+    private var goals: [Goal] {
+        get {
+            statistic.goals ?? []
+        }
+    }
     
     //MARK: Public methods
     func nextStepGoal(index: Int) {
@@ -46,6 +43,8 @@ final class GoalFactory {
     }
     
     func addNewGoal(name goalString: String, days countDays: Int) {
+        statistic.store(goals: goals)
+        print(statistic.goals ?? "")
         viewControllerDelegate?.didReceiveNextGoal(goal: goals.last)
     }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
 		876969B82AC7015B00EE868A /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */; };
+		877DD1722ACD98770032798F /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877DD1712ACD98770032798F /* StatisticService.swift */; };
 		8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938A2AC597B200A46259 /* GoalFormViewController.swift */; };
 		8795938D2AC5BE8700A46259 /* GoalFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938C2AC5BE8700A46259 /* GoalFactoryProtocol.swift */; };
 		87C9D17B2ABF6D4F00222C53 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C9D17A2ABF6D4F00222C53 /* Goal.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
 		876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		877DD1712ACD98770032798F /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		8795938A2AC597B200A46259 /* GoalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormViewController.swift; sourceTree = "<group>"; };
 		8795938C2AC5BE8700A46259 /* GoalFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFactoryProtocol.swift; sourceTree = "<group>"; };
 		87C9D17A2ABF6D4F00222C53 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				87C9D17D2ABF6E8E00222C53 /* GoalFactory.swift */,
 				8795938C2AC5BE8700A46259 /* GoalFactoryProtocol.swift */,
+				877DD1712ACD98770032798F /* StatisticService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			files = (
 				87DE1E9E2ABDB90400B539CB /* ViewController.swift in Sources */,
 				8795938D2AC5BE8700A46259 /* GoalFactoryProtocol.swift in Sources */,
+				877DD1722ACD98770032798F /* StatisticService.swift in Sources */,
 				8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */,
 				87DE1E9A2ABDB90400B539CB /* AppDelegate.swift in Sources */,
 				870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */,
