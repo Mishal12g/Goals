@@ -80,10 +80,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCollectionViewCell else { return ButtonCollectionViewCell()}
+        cell.button.setTitle("\(indexPath.row + 1)", for: .normal)
+        cell.button.titleLabel?.font = .boldSystemFont(ofSize: 40)
+        cell.button.backgroundColor = .black
         
-        cell?.button.backgroundColor = .black
-        return cell ?? UICollectionViewCell()
+        return cell
     }
 }
 
