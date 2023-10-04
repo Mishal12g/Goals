@@ -68,10 +68,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         layout.itemSize = CGSize(width: collectionView.frame.size.width/3.5,
                                  height: collectionView.frame.size.width/3.5)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(ButtonCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
     //MARK: - Collection View
@@ -80,12 +81,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? ButtonCollectionViewCell else { return ButtonCollectionViewCell()}
-        cell.button.setTitle("\(indexPath.row + 1)", for: .normal)
-        cell.button.titleLabel?.font = .boldSystemFont(ofSize: 40)
-        cell.button.backgroundColor = .black
-        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? LabelCollectionViewCell else {
+            return LabelCollectionViewCell()
+        }
+        //        cell.button.setTitle("\(indexPath.row + 1)", for: .normal)
+        cell.label.font = .boldSystemFont(ofSize: 40)
+        cell.backgroundColor = .black
+        cell.label.text = "\(indexPath.row + 1)"
+        cell.layer.cornerRadius = 10
+    
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
     }
 }
 
