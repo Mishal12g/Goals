@@ -17,6 +17,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
     private var index = 0
+    private var days: [Day] = []
     
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -30,17 +31,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //MARK: - IB Actions methods
     @IBAction func onRightButton(_ sender: Any) {
-        
         index = min(index + 1, goalFactory.goalsCount - 1)
         goalFactory.nextStepGoal(index: index)
+        collectionView.reloadData()
     }
     
     @IBAction func onLeftButton(_ sender: Any) {
         index = max(index - 1, 0)
         goalFactory.backStepGoal(index: index)
-        
+        collectionView.reloadData()
     }
-
+    
     //MARK: Privates Methods
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
@@ -50,9 +51,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return modelView
     }
     
-   private func show(_ modelView: GoalModelView) {
+    private func show(_ modelView: GoalModelView) {
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
+        goalNameLabel.text = modelView.name
+        days = modelView.days
     }
     
     //MARK: - Setup collection view
@@ -78,7 +81,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //MARK: - Collection View delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return days.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,16 +90,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         cell.label.font = .boldSystemFont(ofSize: 40)
-        cell.backgroundColor = .black
+        
+        switch days[indexPath.item].state {
+        case .isNotDone:
+            cell.backgroundColor = .black
+        case .isDone:
+            cell.backgroundColor = .green
+        case .isCurrent:
+            cell.backgroundColor = .blue
+        }
+        
         cell.label.text = "\(indexPath.row + 1)"
         cell.layer.cornerRadius = 10
-    
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
+        days[indexPath.item].state = .isDone
+        collectionView.reloadData()
     }
-    
 }
 

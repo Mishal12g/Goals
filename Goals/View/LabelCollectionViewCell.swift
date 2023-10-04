@@ -30,7 +30,6 @@ class LabelCollectionViewCell: UICollectionViewCell {
            addSubview(label)
            label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
            label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-           label.backgroundColor = .black
            label.textColor = .white
            label.layer.cornerRadius = 10
        }

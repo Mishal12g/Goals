@@ -26,7 +26,7 @@ final class GoalFactory {
     var viewControllerDelegate: GoalFactoryDelegate?
     private var goals: [Goal] = [  Goal(name: "Читать",
                                         discription: "read",
-                                        days: [Day(discription: "sdasdas"), Day(discription: ""),Day(state: .isDone, discription: "")]),
+                                        days: [Day(discription: "sdasdas"), Day(discription: "sdasdas"), Day(discription: "sdasdas"), Day(discription: ""),Day(discription: "")]),
                                    Goal(name: "Занятия по программированию",
                                         discription: "learning",
                                         days:[Day(discription: ""), Day(discription: ""),Day(discription: ""),Day(discription: "")]),
