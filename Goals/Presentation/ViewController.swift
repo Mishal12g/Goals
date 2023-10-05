@@ -10,6 +10,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GoalFactoryDelegate {
     
     //MARK: - IB Outlets
+    @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var goalsIndexLabel: UILabel!
     @IBOutlet weak var goalNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -25,8 +26,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
+        startLabel.isHidden = true
+        startLabel.text = "Нет целей.."
+        startLabel.font = UIFont.systemFont(ofSize: 30)
         if goalFactory.goalsCount != 0 {
             goalFactory.backStepGoal(index: index)
+        } else {
+            startLabel.isHidden = false
         }
         setupCollectionView()
     }
@@ -108,7 +114,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         case .isCurrent:
             cell.backgroundColor = .blue
         case .none:
-            cell.backgroundColor = .red
+            cell.backgroundColor = .black
         }
         
         cell.label.text = "\(indexPath.row + 1)"

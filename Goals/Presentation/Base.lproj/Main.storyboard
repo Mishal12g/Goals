@@ -129,14 +129,22 @@
                                     <segue destination="guT-hw-s4R" kind="show" id="yWq-Jn-Bzr"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hs0-ki-Nl2">
+                                <rect key="frame" x="176" y="416" width="41.333333333333343" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HHI-PF-Pwe" secondAttribute="trailing" constant="20" id="3Nt-f6-Nfm"/>
                             <constraint firstItem="rCO-hN-xqk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="6qb-yS-b1x"/>
+                            <constraint firstItem="hs0-ki-Nl2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F6m-lh-vJx"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rCO-hN-xqk" secondAttribute="trailing" constant="20" id="GkL-aS-3cj"/>
                             <constraint firstItem="HHI-PF-Pwe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" symbolic="YES" id="Kdg-xb-lj8"/>
+                            <constraint firstItem="hs0-ki-Nl2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="KoG-s2-4mD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="HHI-PF-Pwe" secondAttribute="bottom" constant="10" id="Lc6-60-5TP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="rCO-hN-xqk" secondAttribute="bottom" id="WTD-QX-RbM"/>
                             <constraint firstItem="rCO-hN-xqk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="qYY-Kg-YtW"/>
@@ -146,6 +154,7 @@
                         <outlet property="collectionView" destination="4BV-B9-gYA" id="mlp-Q7-8Qf"/>
                         <outlet property="goalNameLabel" destination="LCJ-fg-XuN" id="BhW-oN-hbe"/>
                         <outlet property="goalsIndexLabel" destination="Vvx-Sf-j3E" id="Mug-4k-Cql"/>
+                        <outlet property="startLabel" destination="hs0-ki-Nl2" id="G4o-3Z-u9m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

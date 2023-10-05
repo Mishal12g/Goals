@@ -55,6 +55,8 @@ final class StatisticService {
             array.append(goal)
             self.goals = array
         }
+        
+//        UserDefaults.standard.removeObject(forKey: Keys.goals.rawValue)
     }
     
     private enum Keys: String {

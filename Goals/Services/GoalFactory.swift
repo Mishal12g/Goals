@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 protocol GoalFactoryDelegate {
     func didReceiveNextGoal(goal: Goal?)
+    var startLabel: UILabel! { get set }
 }
 
 final class GoalFactory {
@@ -51,6 +53,7 @@ final class GoalFactory {
     }
     
     func addDays(_ num: Int) -> [Day?] {
+        viewControllerDelegate?.startLabel.isHidden = true
         var array: [Day] = []
         for _ in 1...num {
             array.append(Day())
