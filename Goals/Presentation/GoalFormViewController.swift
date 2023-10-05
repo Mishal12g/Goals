@@ -11,7 +11,7 @@ protocol GoalFormDelegate {
     
 }
 
-final class GoalFormViewController: UIViewController, GoalFormDelegate {
+final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFieldDelegate {
     //MARK: - IB Outlets
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalDaysLabel: UILabel!
@@ -25,6 +25,7 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate {
         validationBoarderGoalTextField(false)
         validationBoarderDayTextField(false)
         initSetup()
+        dayFormField.delegate = self
     }
     
     //MARK: - IB Action
@@ -94,5 +95,14 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate {
         dayFormField.placeholder = "0"
         
         doneButton.setTitle("Добавить", for: .normal)
+    }
+    
+    //MARK: Delegates
+    //MARK: UI Text Field Delegate
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let aSet = NSCharacterSet(charactersIn:"0123456789").inverted
+        let compSepByCharInSet = string.components(separatedBy: aSet)
+        let numberFiltered = compSepByCharInSet.joined(separator: "")
+        return string == numberFiltered
     }
 }
