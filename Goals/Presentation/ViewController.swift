@@ -51,7 +51,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: Privates Methods
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
-                                      description: goal.discription,
+                                      description: goal.discription ?? "",
                                       days: goal.days)
         
         return modelView

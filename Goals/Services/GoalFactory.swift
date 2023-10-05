@@ -44,7 +44,8 @@ final class GoalFactory {
     }
     
     func addNewGoal(name goalString: String, days countDays: Int) {
-        statistic.store(goals: [Goal(name: goalString, discription: "dsa", days: addDays(countDays) )])
+        let newGoal = Goal(name: goalString, discription: nil, days: addDays(countDays) )
+        statistic.store(goal: newGoal)
         print(statistic.goals ?? "")
         viewControllerDelegate?.didReceiveNextGoal(goal: goals.first ?? nil)
     }
