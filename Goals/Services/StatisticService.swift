@@ -9,24 +9,32 @@ import Foundation
 
 final class StatisticService {
     
-//    var name: String? {
-//        get {
-//            UserDefaults.standard.string(forKey: Keys.name.rawValue)
-//        }
-//        set {
-//            UserDefaults.standard.set(newValue, forKey: Keys.name.rawValue)
-//        }
-//    }
-//    
-//    var days: [Day]? {
-//        get {
-//            UserDefaults.standard.array(forKey: "goals") as? [Day]
-//        }
-//        set {
-//            UserDefaults.standard.set(newValue, forKey: Keys.days.rawValue)
-//        }
-//
-//    }
+    var name: String? {
+        get {
+            UserDefaults.standard.string(forKey: Keys.name.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: Keys.name.rawValue)
+        }
+    }
+    
+    var days: [Day]? {
+        get {
+            guard let data = UserDefaults.standard.data(forKey: Keys.days.rawValue),
+                  let record = try? JSONDecoder().decode([Day].self, from: data) else {
+                return nil
+            }
+            return record
+        }
+        
+        set {
+            guard let data = try? JSONEncoder().encode(newValue) else {
+                print("Невозможно сохранить результат")
+                return
+            }
+            UserDefaults.standard.setValue(data, forKey: Keys.days.rawValue)
+        }
+    }
     
     var goals: [Goal]? {
         get {
@@ -59,6 +67,6 @@ final class StatisticService {
     }
     
     private enum Keys: String {
-        case goals
+        case goals, days, name
     }
 }
