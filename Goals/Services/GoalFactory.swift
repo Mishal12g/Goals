@@ -9,16 +9,19 @@ import Foundation
 import UIKit
 
 protocol GoalFactoryDelegate {
-    func didReceiveNextGoal(goal: Goal?)
+    func didReceiveGoal(goal: Goal?)
     func showLastGoal(index: Int)
     var startLabel: UILabel! { get set }
 }
 
 final class GoalFactory {
-    let statistic = StatisticService()
+    let statistic: StatisticService?
 
+    init(statistic: StatisticService?) {
+        self.statistic = statistic
+    }
     //MARK: - Public properties
-    static var instance: GoalFactory = GoalFactory()
+    static var instance: GoalFactory = GoalFactory(statistic: StatisticService())
     var viewControllerDelegate: GoalFactoryDelegate?
     
     var goalsCount: Int {
@@ -29,30 +32,34 @@ final class GoalFactory {
     
     
     //MARK: - Privates properties
-    private var goals: [Goal?] {
+     var goals: [Goal?] {
         get {
-            statistic.goals ?? []
+            statistic?.goals ?? []
         }
     }
     
     //MARK: Public methods
     func nextStepGoal(index: Int) {
         let currentGoal =  goals[index]
-        viewControllerDelegate?.didReceiveNextGoal(goal: currentGoal)
+        viewControllerDelegate?.didReceiveGoal(goal: currentGoal)
     }
     
     func backStepGoal(index: Int) {
         let currentGoal =  goals[index]
-        viewControllerDelegate?.didReceiveNextGoal(goal: currentGoal)
+        viewControllerDelegate?.didReceiveGoal(goal: currentGoal)
+    }
+    
+    func getTarget(_ index: Int) {
+        viewControllerDelegate?.didReceiveGoal(goal: goals[index])
     }
     
     func addNewGoal(name goalString: String, days countDays: Int) {
-        statistic.name = goalString
-        statistic.days = addDays(countDays)
-        let newGoal = Goal(name: statistic.name ?? "", discription: nil, days: statistic.days ?? [] )
+        statistic?.name = goalString
+        statistic?.days = addDays(countDays)
+        let newGoal = Goal(name: statistic?.name ?? "", discription: nil, days: statistic?.days ?? [] )
         
-        statistic.store(goal: newGoal)
-        viewControllerDelegate?.didReceiveNextGoal(goal: self.goals.last ?? nil)
+        statistic?.store(goal: newGoal)
+        viewControllerDelegate?.didReceiveGoal(goal: self.goals.last ?? nil)
         viewControllerDelegate?.showLastGoal(index: goals.count - 1)
     }
     

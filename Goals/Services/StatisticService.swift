@@ -42,6 +42,7 @@ final class StatisticService {
                   let record = try? JSONDecoder().decode([Goal].self, from: data) else {
                 return nil
             }
+            
             return record
         }
         
@@ -63,7 +64,9 @@ final class StatisticService {
             array.append(goal)
             self.goals = array
         }
-        
+//        UserDefaults.standard.removeObject(forKey: Keys.name.rawValue)
+//        UserDefaults.standard.removeObject(forKey: Keys.days.rawValue)
+//        UserDefaults.standard.removeObject(forKey: Keys.goals.rawValue)
     }
     
     private enum Keys: String {

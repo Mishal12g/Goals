@@ -18,7 +18,7 @@ struct Day: Codable {
     var state: TargetState
     let discription: String?
     
-    init(state: TargetState = .isNotDone, discription: String = "") {
+    init(state: TargetState = .isNotCurrent, discription: String = "") {
         self.state = state
         self.discription = discription
     }
@@ -26,5 +26,5 @@ struct Day: Codable {
 }
 
 enum TargetState: Codable {
-    case isNotDone, isDone, isCurrent
+    case isNotDone, isDone, isCurrent, isNotCurrent
 }

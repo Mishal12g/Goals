@@ -18,7 +18,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
     private var index = 0
-    private var days: [Day?] = []
     
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -68,7 +67,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
         goalNameLabel.text = modelView.name
-        days = modelView.days
+        goalFactory.statistic?.days = modelView.days
     }
     
     private func displaySettingsGoals() {
@@ -97,7 +96,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //MARK: Delegates
     //MARK: - GoalFactoryDelegate
-    func didReceiveNextGoal(goal: Goal?) {
+    func didReceiveGoal(goal: Goal?) {
         guard let goal = goal else {
             goalNameLabel.text = "Нет Целей"
             return
@@ -108,7 +107,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //MARK: - Collection View delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return days.count
+        return goalFactory.statistic?.days?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,13 +117,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         cell.label.font = .boldSystemFont(ofSize: 40)
         
-        switch days[indexPath.item]?.state {
+        switch goalFactory.statistic?.days?[indexPath.item].state {
         case .isNotDone:
-            cell.backgroundColor = .black
+            cell.backgroundColor = .red
         case .isDone:
             cell.backgroundColor = .green
         case .isCurrent:
-            cell.backgroundColor = .blue
+            cell.backgroundColor = .yellow
+        case .isNotCurrent:
+            cell.backgroundColor = .gray
         case .none:
             cell.backgroundColor = .black
         }
@@ -134,11 +135,40 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
-        days[indexPath.item]?.state = .isDone
-        collectionView.reloadData()
+//        goalFactory.statistic?.goals?[index].days[indexPath.item].state = .isCurrent
+//        goalFactory.getTarget(index)
+//        collectionView.reloadData()
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, 
+                        contextMenuConfigurationForItemAt indexPath: IndexPath,
+                        point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
+            
+            let isDone = UIAction(title: "Выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isDone
+                self.goalFactory.getTarget(self.index)
+                collectionView.reloadData()
+            }
+            
+            let isNotdone = UIAction(title: "Не выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isNotDone
+                self.goalFactory.getTarget(self.index)
+                collectionView.reloadData()
+            }
+
+            
+            return UIMenu(title: "",
+                          image: nil, 
+                          identifier: nil,
+                          options: UIMenu.Options.displayInline,
+                          children: [isDone, isNotdone])
+        }
+        return config
     }
 }
 

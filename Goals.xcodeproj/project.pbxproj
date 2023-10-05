@@ -62,8 +62,8 @@
 		87C9D1772ABF67D700222C53 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				87DE1E9D2ABDB90400B539CB /* ViewController.swift */,
 				87DE1E9F2ABDB90400B539CB /* Main.storyboard */,
+				87DE1E9D2ABDB90400B539CB /* ViewController.swift */,
 				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
 			);
 			path = Presentation;
