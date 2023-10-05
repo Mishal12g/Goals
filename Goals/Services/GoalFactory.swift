@@ -10,6 +10,7 @@ import UIKit
 
 protocol GoalFactoryDelegate {
     func didReceiveNextGoal(goal: Goal?)
+    func showLastGoal(index: Int)
     var startLabel: UILabel! { get set }
 }
 
@@ -47,9 +48,10 @@ final class GoalFactory {
     
     func addNewGoal(name goalString: String, days countDays: Int) {
         let newGoal = Goal(name: goalString, discription: nil, days: addDays(countDays) )
+        
         statistic.store(goal: newGoal)
-        print(statistic.goals ?? "")
-        viewControllerDelegate?.didReceiveNextGoal(goal: goals.first ?? nil)
+        viewControllerDelegate?.didReceiveNextGoal(goal: self.goals.last ?? nil)
+        viewControllerDelegate?.showLastGoal(index: goals.count - 1)
     }
     
     func addDays(_ num: Int) -> [Day?] {

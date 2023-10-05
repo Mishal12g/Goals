@@ -26,14 +26,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
-        startLabel.isHidden = true
-        startLabel.text = "Нет целей.."
-        startLabel.font = UIFont.systemFont(ofSize: 30)
-        if goalFactory.goalsCount != 0 {
-            goalFactory.backStepGoal(index: index)
-        } else {
-            startLabel.isHidden = false
-        }
+        displaySettingsGoals()
         setupCollectionView()
     }
     
@@ -54,6 +47,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    func showLastGoal(index: Int) {
+        self.index = index
+        let indexTotal = goalFactory.goalsCount
+        goalFactory.nextStepGoal(index: self.index)
+        goalsIndexLabel.text = "\(self.index + 1)/\(indexTotal)"
+        collectionView.reloadData()
+    }
+        
     //MARK: Privates Methods
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
@@ -67,7 +68,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let indexTotal = goalFactory.goalsCount
         goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
         goalNameLabel.text = modelView.name
-        days = modelView.days 
+        days = modelView.days
+    }
+    
+    private func displaySettingsGoals() {
+        startLabel.isHidden = true
+        startLabel.text = "Нет целей.."
+        startLabel.font = UIFont.systemFont(ofSize: 30)
+        if goalFactory.goalsCount != 0 {
+            goalFactory.backStepGoal(index: index)
+        } else {
+            startLabel.isHidden = false
+        }
     }
     
     //MARK: - Setup collection view
