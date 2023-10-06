@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8704DDBE2ACFF6150063D779 /* GoalFactoryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8704DDBD2ACFF6150063D779 /* GoalFactoryDelegate.swift */; };
 		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
+		8729A0972AD04FAC003E200C /* FormDescriptionDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */; };
 		876969B82AC7015B00EE868A /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */; };
 		877DD1722ACD98770032798F /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877DD1712ACD98770032798F /* StatisticService.swift */; };
 		8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938A2AC597B200A46259 /* GoalFormViewController.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		8704DDBD2ACFF6150063D779 /* GoalFactoryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFactoryDelegate.swift; sourceTree = "<group>"; };
 		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
+		8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDescriptionDayViewController.swift; sourceTree = "<group>"; };
 		876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		877DD1712ACD98770032798F /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		8795938A2AC597B200A46259 /* GoalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 				87DE1E9F2ABDB90400B539CB /* Main.storyboard */,
 				87DE1E9D2ABDB90400B539CB /* ViewController.swift */,
 				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
+				8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8729A0972AD04FAC003E200C /* FormDescriptionDayViewController.swift in Sources */,
 				87DE1E9E2ABDB90400B539CB /* ViewController.swift in Sources */,
 				877DD1722ACD98770032798F /* StatisticService.swift in Sources */,
 				8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */,
@@ -368,6 +372,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -396,6 +401,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

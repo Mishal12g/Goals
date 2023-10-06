@@ -14,6 +14,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var goalsIndexLabel: UILabel!
     @IBOutlet weak var goalNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var addButton: UIButton!
     
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
@@ -22,6 +23,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        addButton.titleLabel?.text = nil
         goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
@@ -160,13 +162,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.goalFactory.getTarget(self.index)
                 collectionView.reloadData()
             }
+            
+            let writeResult = UIAction(title: "Записать результат дня", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil) // Замените "Main" на имя вашего сториборда
+                let formDescriptionDayController = storyboard.instantiateViewController(withIdentifier: "FormDescriptionDayViewController") as! FormDescriptionDayViewController
+                formDescriptionDayController.modalPresentationStyle = .fullScreen
+                self.present(formDescriptionDayController, animated: false, completion: nil)
+            }
+
 
             
             return UIMenu(title: "",
                           image: nil, 
                           identifier: nil,
                           options: UIMenu.Options.displayInline,
-                          children: [isDone, isNotdone])
+                          children: [isDone, isNotdone, writeResult])
         }
         return config
     }
