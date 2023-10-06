@@ -127,7 +127,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         case .isNotCurrent:
             cell.backgroundColor = .gray
         case .none:
-            cell.backgroundColor = .black
+            print("no elements")
         }
         
         cell.label.text = "\(indexPath.row + 1)"

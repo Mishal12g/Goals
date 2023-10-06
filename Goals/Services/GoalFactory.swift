@@ -6,13 +6,6 @@
 //
 
 import Foundation
-import UIKit
-
-protocol GoalFactoryDelegate {
-    func didReceiveGoal(goal: Goal?)
-    func showLastGoal(index: Int)
-    var startLabel: UILabel! { get set }
-}
 
 final class GoalFactory {
     let statistic: StatisticService?
@@ -29,7 +22,6 @@ final class GoalFactory {
             goals.count
         }
     }
-    
     
     //MARK: - Privates properties
      var goals: [Goal?] {
