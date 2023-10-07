@@ -26,9 +26,15 @@ class FormDescriptionDayViewController: UIViewController {
     
     //MARK: IB actions methods
     @IBAction func but(_ sender: Any) {
-        if !textField.text.isEmpty {
-            goalFactory.addDescription(textField.text)
+        guard var text = textField.text else { return }
+        
+        text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if !text.isEmpty {
+            let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
+            goalFactory.addDescription(trimmedText)
         }
+        
         dismiss(animated: false, completion: nil)
     }
     
