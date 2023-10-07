@@ -30,10 +30,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalsIndexLabel.text = nil
         displaySettingsGoals()
         setupCollectionView()
-        
     }
 
     //MARK: - IB Actions methods
+    @IBAction func onDeleteGoal(_ sender: Any) {
+        if index == goalFactory.goalsCount - 1 && index != 0{
+            index -= 1
+            goalFactory.deleteGoal()
+            goalFactory.backStepGoal(index: index)
+        } else if goalFactory.goalsCount > 1 {
+            goalFactory.deleteGoal()
+            goalFactory.backStepGoal(index: index)
+        } else {
+            goalFactory.deleteGoal()
+    }
+         
+        collectionView.reloadData()
+    }
+    
     @IBAction func onRightButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
             index = min(index + 1, goalFactory.goalsCount - 1)

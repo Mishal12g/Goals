@@ -49,6 +49,13 @@ final class GoalFactory {
         statistic?.goals?[viewControllerDelegate?.index ?? 0].days[viewControllerDelegate?.indexPath ?? 0].description = str
     }
     
+    func deleteGoal() {
+        if !(statistic?.goals?.isEmpty ?? false) {
+            statistic?.goals?[viewControllerDelegate?.index ?? 0].days.removeAll()
+            statistic?.goals?.remove(at: viewControllerDelegate?.index ?? 0)
+        }
+    }
+    
     func addNewGoal(name goalString: String, days countDays: Int) {
         statistic?.name = goalString
         statistic?.days = addDays(countDays)
