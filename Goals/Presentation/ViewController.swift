@@ -18,7 +18,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
-    private var index = 0
+    var index = 0
+    var indexPath = 0
     
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -29,8 +30,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         goalsIndexLabel.text = nil
         displaySettingsGoals()
         setupCollectionView()
+        
     }
-    
+
     //MARK: - IB Actions methods
     @IBAction func onRightButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
@@ -59,7 +61,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //MARK: Privates Methods
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
-                                      description: goal.discription ?? "",
+                                      description: goal.description ?? "",
                                       days: goal.days)
         
         return modelView
@@ -139,12 +141,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Нажата ячейка в секции \(indexPath.section), элемент \(indexPath.item + 1)")
-//        goalFactory.statistic?.goals?[index].days[indexPath.item].state = .isCurrent
-//        goalFactory.getTarget(index)
-//        collectionView.reloadData()
+        
+        guard let description = goalFactory.goals[index]?.days[indexPath.item].description else { return }
+        
+        let alert = UIAlertController(title: "Результат \(indexPath.item + 1) дня ",
+                                      message: description,
+                                      preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Выйти", style: .default) {_ in
+            
+        }
+        
+        alert.addAction(action)
+        self.present(alert, animated: true)
     }
-    
     
     func collectionView(_ collectionView: UICollectionView, 
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
@@ -164,7 +174,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
             
             let writeResult = UIAction(title: "Записать результат дня", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                
+                self.indexPath = indexPath.item
                 let storyboard = UIStoryboard(name: "Main", bundle: nil) // Замените "Main" на имя вашего сториборда
                 let formDescriptionDayController = storyboard.instantiateViewController(withIdentifier: "FormDescriptionDayViewController") as! FormDescriptionDayViewController
                 formDescriptionDayController.modalPresentationStyle = .fullScreen
@@ -180,4 +190,3 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return config
     }
 }
-

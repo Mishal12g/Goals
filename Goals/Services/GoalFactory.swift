@@ -9,7 +9,7 @@ import Foundation
 
 final class GoalFactory {
     let statistic: StatisticService?
-
+    
     init(statistic: StatisticService?) {
         self.statistic = statistic
     }
@@ -24,7 +24,7 @@ final class GoalFactory {
     }
     
     //MARK: - Privates properties
-     var goals: [Goal?] {
+    var goals: [Goal?] {
         get {
             statistic?.goals ?? []
         }
@@ -45,10 +45,14 @@ final class GoalFactory {
         viewControllerDelegate?.didReceiveGoal(goal: goals[index])
     }
     
+    func addDescription(_ str: String) {
+        statistic?.goals?[viewControllerDelegate?.index ?? 0].days[viewControllerDelegate?.indexPath ?? 0].description = str
+    }
+    
     func addNewGoal(name goalString: String, days countDays: Int) {
         statistic?.name = goalString
         statistic?.days = addDays(countDays)
-        let newGoal = Goal(name: statistic?.name ?? "", discription: nil, days: statistic?.days ?? [] )
+        let newGoal = Goal(name: statistic?.name ?? "", description: nil, days: statistic?.days ?? [] )
         
         statistic?.store(goal: newGoal)
         viewControllerDelegate?.didReceiveGoal(goal: self.goals.last ?? nil)
@@ -62,7 +66,6 @@ final class GoalFactory {
         for _ in 1...num {
             array.append(Day())
         }
-        
-        return array
+            return array
+        }
     }
-}

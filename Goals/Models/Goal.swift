@@ -9,18 +9,17 @@ import Foundation
 
 struct Goal: Codable {
     let name: String
-    let discription: String?
+    var description: String?
     var days: [Day]
    
 }
 
 struct Day: Codable {
     var state: TargetState
-    let discription: String?
+    var description: String?
     
-    init(state: TargetState = .isNotCurrent, discription: String = "") {
+    init(state: TargetState = .isNotCurrent) {
         self.state = state
-        self.discription = discription
     }
     
 }

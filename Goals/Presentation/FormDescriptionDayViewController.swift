@@ -13,6 +13,9 @@ class FormDescriptionDayViewController: UIViewController {
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textField: UITextView!
     
+    //MARK: Privates properties
+    private let goalFactory = GoalFactory.instance
+    
     //MARK: Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +26,9 @@ class FormDescriptionDayViewController: UIViewController {
     
     //MARK: IB actions methods
     @IBAction func but(_ sender: Any) {
+        if !textField.text.isEmpty {
+            goalFactory.addDescription(textField.text)
+        }
         dismiss(animated: false, completion: nil)
     }
     
