@@ -8,13 +8,52 @@
 import UIKit
 
 class FormDescriptionDayViewController: UIViewController {
+    //MARK: IB Outlets
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var textField: UITextView!
     
+    //MARK: Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
+        keyboard()
+        viewSetingsTextField()
     }
     
+    //MARK: IB actions methods
     @IBAction func but(_ sender: Any) {
         dismiss(animated: false, completion: nil)
+    }
+    
+    //MARK: Privates methods
+    //MARK: Keyboard methods show/hide
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let keyboardHeight = keyboardFrame.height
+            buttonBottomConstraint.constant = keyboardHeight
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        buttonBottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func keyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func viewSetingsTextField() {
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.cornerRadius = 5.0
+        textField.becomeFirstResponder()
     }
 }

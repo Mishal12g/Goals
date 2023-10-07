@@ -171,8 +171,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.present(formDescriptionDayController, animated: false, completion: nil)
             }
 
-
-            
             return UIMenu(title: "",
                           image: nil, 
                           identifier: nil,

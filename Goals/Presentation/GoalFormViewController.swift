@@ -71,6 +71,7 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFi
     
     //MARK: - Validadion
     private func validationBoarderGoalTextField(_ isEmpty: Bool) {
+        goalFormField.becomeFirstResponder()
         goalFormField.layer.borderWidth = 1
         goalFormField.layer.cornerRadius = 5
         goalFormField.layer.borderColor = isEmpty ? UIColor.red.cgColor : UIColor.gray.cgColor
