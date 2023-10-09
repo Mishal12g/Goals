@@ -48,7 +48,7 @@ final class GoalFactory {
         
         statistic?.store(goal: newGoal)
         viewControllerDelegate?.didReceiveGoal(goal: self.goals.last ?? nil)
-        viewControllerDelegate?.showLastGoal(index: goals.count - 1)
+        viewControllerDelegate?.didShowLastGoal(index: goals.count - 1)
     }
     
     //MARK: Privates Methods

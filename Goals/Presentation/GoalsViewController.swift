@@ -64,14 +64,6 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
     }
     
-    func showLastGoal(index: Int) {
-        self.index = index
-        let indexTotal = goalFactory.goalsCount
-        goalFactory.requestNextGoal(index: self.index)
-        goalsIndexLabel.text = "\(self.index + 1)/\(indexTotal)"
-        collectionView.reloadData()
-    }
-        
     //MARK: Privates Methods
     private func deleteGoal() {
         if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
@@ -121,6 +113,14 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     //MARK: Delegates
     //MARK: - GoalFactoryDelegate
+    func didShowLastGoal(index: Int) {
+        self.index = index
+        let indexTotal = goalFactory.goalsCount
+        goalFactory.requestNextGoal(index: self.index)
+        goalsIndexLabel.text = "\(self.index + 1)/\(indexTotal)"
+        collectionView.reloadData()
+    }
+    
     func didReceiveGoal(goal: Goal?) {
         guard let goal = goal else {
             goalNameLabel.text = "Нет Целей"
