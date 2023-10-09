@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GoalFactoryDelegate {
+class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GoalFactoryDelegate {
     
     //MARK: - IB Outlets
     @IBOutlet weak var startLabel: UILabel!
@@ -42,8 +42,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             goalFactory.deleteGoal()
             goalFactory.backStepGoal(index: index)
         } else {
-            goalFactory.deleteGoal()
-    }
+            return
+        }
          
         collectionView.reloadData()
     }
