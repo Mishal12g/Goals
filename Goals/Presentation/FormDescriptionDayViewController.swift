@@ -32,13 +32,21 @@ class FormDescriptionDayViewController: UIViewController {
         
         if !text.isEmpty {
             let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            goalFactory.addDescription(trimmedText)
+            addDescription(trimmedText)
         }
         
         dismiss(animated: false, completion: nil)
     }
     
     //MARK: Privates methods
+    func addDescription(_ str: String) {
+        guard let statistic = goalFactory.statistic,
+                let index = goalFactory.viewControllerDelegate?.index,
+                let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
+        
+        statistic.goals?[index].days[indexPath].description = str
+    }
+    
     //MARK: Keyboard methods show/hide
     @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
