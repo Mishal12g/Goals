@@ -36,10 +36,10 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBAction func onDeleteGoal(_ sender: Any) {
         if index == goalFactory.goalsCount - 1 && index != 0{
             index -= 1
-            goalFactory.deleteGoal()
+            deleteGoal()
             goalFactory.requestNextGoal(index: index)
         } else if goalFactory.goalsCount > 1 {
-            goalFactory.deleteGoal()
+            deleteGoal()
             goalFactory.requestNextGoal(index: index)
         } else {
             return
@@ -73,6 +73,13 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
         
     //MARK: Privates Methods
+    private func deleteGoal() {
+        if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
+            goalFactory.statistic?.goals?[index].days.removeAll()
+            goalFactory.statistic?.goals?.remove(at: index)
+        }
+    }
+    
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
                                       description: goal.description ?? "",
@@ -177,13 +184,13 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
             
             let isDone = UIAction(title: "Выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                 self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isDone
-                self.goalFactory.getTarget(self.index)
+                self.goalFactory.requestNextGoal(index: self.index)
                 collectionView.reloadData()
             }
             
             let isNotdone = UIAction(title: "Не выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                 self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isNotDone
-                self.goalFactory.getTarget(self.index)
+                self.goalFactory.requestNextGoal(index:self.index)
                 collectionView.reloadData()
             }
             
