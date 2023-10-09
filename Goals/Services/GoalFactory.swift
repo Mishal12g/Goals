@@ -30,16 +30,13 @@ final class GoalFactory {
         }
     }
     
-    //MARK: Public methods
-    func nextStepGoal(index: Int) {
-        let currentGoal =  goals[index]
-        viewControllerDelegate?.didReceiveGoal(goal: currentGoal)
+    func requestNextGoal(index: Int) {
+        guard let goal = goals[index] else { return }
+        
+        viewControllerDelegate?.didReceiveGoal(goal: goal)
     }
     
-    func backStepGoal(index: Int) {
-        let currentGoal =  goals[index]
-        viewControllerDelegate?.didReceiveGoal(goal: currentGoal)
-    }
+    //MARK: Public methods
     
     func getTarget(_ index: Int) {
         viewControllerDelegate?.didReceiveGoal(goal: goals[index])

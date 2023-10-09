@@ -37,10 +37,10 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         if index == goalFactory.goalsCount - 1 && index != 0{
             index -= 1
             goalFactory.deleteGoal()
-            goalFactory.backStepGoal(index: index)
+            goalFactory.requestNextGoal(index: index)
         } else if goalFactory.goalsCount > 1 {
             goalFactory.deleteGoal()
-            goalFactory.backStepGoal(index: index)
+            goalFactory.requestNextGoal(index: index)
         } else {
             return
         }
@@ -51,7 +51,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBAction func onRightButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
             index = min(index + 1, goalFactory.goalsCount - 1)
-            goalFactory.nextStepGoal(index: index)
+            goalFactory.requestNextGoal(index: index)
             collectionView.reloadData()
         }
     }
@@ -59,7 +59,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBAction func onLeftButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
             index = max(index - 1, 0)
-            goalFactory.backStepGoal(index: index)
+            goalFactory.requestNextGoal(index: index)
             collectionView.reloadData()
         }
     }
@@ -67,7 +67,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     func showLastGoal(index: Int) {
         self.index = index
         let indexTotal = goalFactory.goalsCount
-        goalFactory.nextStepGoal(index: self.index)
+        goalFactory.requestNextGoal(index: self.index)
         goalsIndexLabel.text = "\(self.index + 1)/\(indexTotal)"
         collectionView.reloadData()
     }
@@ -93,7 +93,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         startLabel.text = "Нет целей.."
         startLabel.font = UIFont.systemFont(ofSize: 30)
         if goalFactory.goalsCount != 0 {
-            goalFactory.backStepGoal(index: index)
+            goalFactory.requestNextGoal(index: index)
         } else {
             startLabel.isHidden = false
         }
