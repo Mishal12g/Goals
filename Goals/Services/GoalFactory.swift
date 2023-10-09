@@ -40,24 +40,4 @@ final class GoalFactory {
     func addDescription(_ str: String) {
         statistic?.goals?[viewControllerDelegate?.index ?? 0].days[viewControllerDelegate?.indexPath ?? 0].description = str
     }
-
-    func addNewGoal(name goalString: String, days countDays: Int) {
-        statistic?.name = goalString
-        statistic?.days = addDays(countDays)
-        let newGoal = Goal(name: statistic?.name ?? "", description: nil, days: statistic?.days ?? [] )
-        
-        statistic?.store(goal: newGoal)
-        viewControllerDelegate?.didReceiveGoal(goal: self.goals.last ?? nil)
-        viewControllerDelegate?.didShowLastGoal(index: goals.count - 1)
-    }
-    
-    //MARK: Privates Methods
-    private func addDays(_ num: Int) -> [Day] {
-        viewControllerDelegate?.startLabel.isHidden = true
-        var array: [Day] = []
-        for _ in 1...num {
-            array.append(Day())
-        }
-            return array
-        }
-    }
+}

@@ -20,7 +20,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     private let goalFactory = GoalFactory.instance
     var index = 0
     var indexPath = 0
-    
+
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()

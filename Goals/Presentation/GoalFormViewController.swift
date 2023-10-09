@@ -7,11 +7,7 @@
 
 import UIKit
 
-protocol GoalFormDelegate {
-    
-}
-
-final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFieldDelegate {
+final class GoalFormViewController: UIViewController, UITextFieldDelegate {
     //MARK: - IB Outlets
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalDaysLabel: UILabel!
@@ -19,9 +15,13 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFi
     @IBOutlet weak var dayFormField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
+    private let goalFactory = GoalFactory.instance
+    var viewControllerDelegate: GoalFactoryDelegate?
+    
     //MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewControllerDelegate = goalFactory.viewControllerDelegate
         validationBoarderGoalTextField(false)
         validationBoarderDayTextField(false)
         initSetup()
@@ -61,13 +61,33 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFi
             
             guard let numDays = dayFormField.text else { return }
             guard let text = goalFormField.text else { return }
-            GoalFactory.instance.addNewGoal(name: text,
-                                            days: Int(numDays) ?? 0)
+            addNewGoal(name: text,
+                       days: Int(numDays) ?? 0)
             
             dismiss(animated: true, completion: nil)
         }
     }
     
+    //MARK: - Privates Methods
+    private func addNewGoal(name goalString: String, days countDays: Int) {
+        guard let statistic = goalFactory.statistic else { return }
+        statistic.name = goalString
+        statistic.days = addDays(countDays)
+        let newGoal = Goal(name: statistic.name ?? "", description: nil, days: statistic.days ?? [] )
+        
+        statistic.store(goal: newGoal)
+        
+        viewControllerDelegate?.didShowLastGoal(index: goalFactory.goalsCount - 1)
+    }
+    
+    private func addDays(_ num: Int) -> [Day] {
+        viewControllerDelegate?.startLabel.isHidden = true
+        var array: [Day] = []
+        for _ in 1...num {
+            array.append(Day())
+        }
+        return array
+    }
     
     //MARK: - Validadion
     private func validationBoarderGoalTextField(_ isEmpty: Bool) {
@@ -83,7 +103,6 @@ final class GoalFormViewController: UIViewController, GoalFormDelegate, UITextFi
         dayFormField.layer.borderColor = isEmpty ? UIColor.red.cgColor : UIColor.gray.cgColor
     }
     
-    //MARK: - Privates Methods
     private func initSetup() {
         goalLabel.text = "Цель"
         goalLabel.font = UIFont.boldSystemFont(ofSize: 25)
