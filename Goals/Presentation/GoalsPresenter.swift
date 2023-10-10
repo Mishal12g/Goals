@@ -8,19 +8,38 @@
 import Foundation
 
 final class GoalsPresenter {
-    let goalFactory = GoalFactory.instance
+    //MARK: - Public properties
     var index = 0
+    
+    //MARK: - Privates properties
+    private let goalFactory = GoalFactory.instance
     private let viewController: GoalsViewControllerProtocol?
     
+    //MARK: - Init
     init(viewController: GoalsViewControllerProtocol?){
         self.viewController = viewController
         goalFactory.viewControllerDelegate = self
     }
-    
-    
 }
 
-extension GoalsPresenter: GoalFactoryDelegate {
+extension GoalsPresenter {
+    
+    //MARK: - Public methods
+    func buttonsHandlerForTransition(_ step: Bool) {
+        if step {
+            if goalFactory.goalsCount != 0 {
+                index = min(index + 1, goalFactory.goalsCount - 1)
+                goalFactory.requestNextGoal(index: index)
+                viewController?.reloadData()
+            }
+        } else {
+            if goalFactory.goalsCount != 0 {
+                index = max(index - 1, 0)
+                goalFactory.requestNextGoal(index: index)
+                viewController?.reloadData()
+            }
+        }
+    }
     
     func deleteGoal() {
         if index == goalFactory.goalsCount - 1 && index != 0{
@@ -37,13 +56,14 @@ extension GoalsPresenter: GoalFactoryDelegate {
         viewController?.reloadData()
     }
     
+    //MARK: Privates methods
     private func remove() {
         if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
             goalFactory.statistic?.goals?[index].days.removeAll()
             goalFactory.statistic?.goals?.remove(at: index)
         }
     }
-
+    
     
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
@@ -59,7 +79,10 @@ extension GoalsPresenter: GoalFactoryDelegate {
         viewController?.changeGoalNameLabel(modelView.name)
         goalFactory.statistic?.days = modelView.days
     }
-    
+}
+
+//MARK: - GoalFactoryDelegate
+extension GoalsPresenter: GoalFactoryDelegate {
     func didShowLastGoal(index: Int) {
         self.index = index
         let indexTotal = goalFactory.goalsCount

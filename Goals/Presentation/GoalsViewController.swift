@@ -21,10 +21,7 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     @IBOutlet weak var goalNameLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
-    
-    //MARK: - Public property
-    var indexPath = 0
-    
+        
     //MARK: - Privates property
     private var presenter: GoalsPresenter!
     private let goalFactory = GoalFactory.instance
@@ -46,19 +43,11 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     }
     
     @IBAction func onRightButton(_ sender: Any) {
-        if goalFactory.goalsCount != 0 {
-            presenter.index = min(presenter.index + 1, goalFactory.goalsCount - 1)
-            goalFactory.requestNextGoal(index: presenter.index)
-            collectionView.reloadData()
-        }
+        presenter.buttonsHandlerForTransition(true)
     }
     
     @IBAction func onLeftButton(_ sender: Any) {
-        if goalFactory.goalsCount != 0 {
-            presenter.index = max(presenter.index - 1, 0)
-            goalFactory.requestNextGoal(index: presenter.index)
-            collectionView.reloadData()
-        }
+        presenter.buttonsHandlerForTransition(false)
     }
 }
 
@@ -179,7 +168,6 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
             }
             
             let writeResult = UIAction(title: "Записать результат дня", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.indexPath = indexPath.item
                 let storyboard = UIStoryboard(name: "Main", bundle: nil) // Замените "Main" на имя вашего сториборда
                 let formDescriptionDayController = storyboard.instantiateViewController(withIdentifier: "FormDescriptionDayViewController") as! FormDescriptionDayViewController
                 formDescriptionDayController.modalPresentationStyle = .fullScreen
