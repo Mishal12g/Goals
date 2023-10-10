@@ -8,16 +8,17 @@
 import UIKit
 
 class FormDescriptionDayViewController: UIViewController {
-    //MARK: IB Outlets
+    //MARK: - IB Outlets
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textField: UITextView!
-    
-    //MARK: Privates properties
+
+    //MARK: - Privates properties
     private let goalFactory = GoalFactory.instance
+    private var indexPath = IndexPath()
     private var index: Int = 0
-    
-    //MARK: Overrides methods
+        
+    //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -25,7 +26,7 @@ class FormDescriptionDayViewController: UIViewController {
         viewSetingsTextField()
     }
 
-    //MARK: IB actions methods
+    //MARK: - IB actions methods
     @IBAction func but(_ sender: Any) {
         guard var text = textField.text else { return }
         
@@ -41,16 +42,21 @@ class FormDescriptionDayViewController: UIViewController {
 }
 
 extension FormDescriptionDayViewController {
-    //MARK: - Privates methods
-    func addDescription(_ str: String) {
-//        guard let statistic = goalFactory.statistic,
-//              let index = delegate?.index,
-//              let indexPath = delegate?.indexPath else { return }
-//        
-//        statistic.goals?[index].days[indexPath].description = str
+    
+    //MARK: - Public methods
+    func getIndex(index: Int, indexPath: IndexPath) {
+        self.index = index
+        self.indexPath = indexPath
     }
     
-    //MARK: Keyboard methods show/hide
+    //MARK: - Privates methods
+    func addDescription(_ str: String) {
+        guard let statistic = goalFactory.statistic else { return }
+
+        statistic.goals?[index].days[indexPath.item].description = str
+    }
+    
+    //MARK: - Keyboard methods show/hide
     @objc private func keyboardWillShow(_ notification: Notification) {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let keyboardHeight = keyboardFrame.height

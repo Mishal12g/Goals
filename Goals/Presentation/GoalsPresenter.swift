@@ -56,7 +56,7 @@ extension GoalsPresenter {
         viewController?.reloadData()
     }
     
-    //MARK: Privates methods
+    //MARK: - Privates methods
     private func remove() {
         if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
             goalFactory.statistic?.goals?[index].days.removeAll()

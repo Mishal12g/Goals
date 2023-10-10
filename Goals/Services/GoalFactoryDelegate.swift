@@ -10,6 +10,4 @@ import UIKit
 protocol GoalFactoryDelegate {
     func didReceiveGoal(goal: Goal?)
     func didShowLastGoal(index: Int)
-//    var index: Int { get }
-//    var indexPath: Int { get }
 }

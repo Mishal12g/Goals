@@ -173,6 +173,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
             let writeResult = UIAction(title: "Записать результат дня", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
                 let storyboard = UIStoryboard(name: "Main", bundle: nil) // Замените "Main" на имя вашего сториборда
                 let formDescriptionDayController = storyboard.instantiateViewController(withIdentifier: "FormDescriptionDayViewController") as! FormDescriptionDayViewController
+                formDescriptionDayController.getIndex(index: self.presenter.index, indexPath: indexPath)
                 formDescriptionDayController.modalPresentationStyle = .fullScreen
                 self.present(formDescriptionDayController, animated: false, completion: nil)
             }
