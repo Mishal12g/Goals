@@ -37,12 +37,14 @@ class FormDescriptionDayViewController: UIViewController {
         
         dismiss(animated: false, completion: nil)
     }
-    
+}
+
+extension FormDescriptionDayViewController {
     //MARK: Privates methods
     func addDescription(_ str: String) {
         guard let statistic = goalFactory.statistic,
-                let index = goalFactory.viewControllerDelegate?.index,
-                let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
+              let index = goalFactory.viewControllerDelegate?.index,
+              let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
         
         statistic.goals?[index].days[indexPath].description = str
     }

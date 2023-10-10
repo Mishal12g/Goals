@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class GoalFormViewController: UIViewController, UITextFieldDelegate {
+final class GoalFormViewController: UIViewController {
     //MARK: - IB Outlets
     @IBOutlet weak var goalLabel: UILabel!
     @IBOutlet weak var goalDaysLabel: UILabel!
@@ -67,6 +67,9 @@ final class GoalFormViewController: UIViewController, UITextFieldDelegate {
             dismiss(animated: true, completion: nil)
         }
     }
+}
+
+extension GoalFormViewController {
     
     //MARK: - Privates Methods
     private func addNewGoal(name goalString: String, days countDays: Int) {
@@ -89,6 +92,23 @@ final class GoalFormViewController: UIViewController, UITextFieldDelegate {
         return array
     }
     
+    private func initSetup() {
+        goalLabel.text = "Цель"
+        goalLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        goalLabel.numberOfLines = 2
+        goalDaysLabel.text = "Введите количество дней"
+        goalDaysLabel.font = UIFont.boldSystemFont(ofSize: 25)
+        goalDaysLabel.numberOfLines = 2
+        
+        goalFormField.placeholder = "Введите вашу цель.."
+        dayFormField.placeholder = "0"
+        
+        doneButton.setTitle("Добавить", for: .normal)
+    }
+}
+
+//MARK: - Extension TextField
+extension GoalFormViewController: UITextFieldDelegate {
     //MARK: - Validadion
     private func validationBoarderGoalTextField(_ isEmpty: Bool) {
         goalFormField.becomeFirstResponder()
@@ -103,21 +123,6 @@ final class GoalFormViewController: UIViewController, UITextFieldDelegate {
         dayFormField.layer.borderColor = isEmpty ? UIColor.red.cgColor : UIColor.gray.cgColor
     }
     
-    private func initSetup() {
-        goalLabel.text = "Цель"
-        goalLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        goalLabel.numberOfLines = 2
-        goalDaysLabel.text = "Введите количество дней"
-        goalDaysLabel.font = UIFont.boldSystemFont(ofSize: 25)
-        goalDaysLabel.numberOfLines = 2
-        
-        goalFormField.placeholder = "Введите вашу цель.."
-        dayFormField.placeholder = "0"
-        
-        doneButton.setTitle("Добавить", for: .normal)
-    }
-    
-    //MARK: Delegates
     //MARK: UI Text Field Delegate
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let aSet = NSCharacterSet(charactersIn:"0123456789").inverted

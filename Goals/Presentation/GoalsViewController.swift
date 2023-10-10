@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, GoalFactoryDelegate {
+class GoalsViewController: UIViewController {
     
     //MARK: - IB Outlets
     @IBOutlet weak var startLabel: UILabel!
@@ -16,10 +16,12 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
     
-    //MARK: - Privates property
-    private let goalFactory = GoalFactory.instance
+    //MARK: - Public methods
     var index = 0
     var indexPath = 0
+    
+    //MARK: - Privates property
+    private let goalFactory = GoalFactory.instance
 
     //MARK: - Overrides methods
     override func viewDidLoad() {
@@ -31,7 +33,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         displaySettingsGoals()
         setupCollectionView()
     }
-
+    
     //MARK: - IB Actions methods
     @IBAction func onDeleteGoal(_ sender: Any) {
         if index == goalFactory.goalsCount - 1 && index != 0{
@@ -44,7 +46,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         } else {
             return
         }
-         
+        
         collectionView.reloadData()
     }
     
@@ -63,6 +65,9 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
             collectionView.reloadData()
         }
     }
+}
+
+extension GoalsViewController {
     
     //MARK: Privates Methods
     private func deleteGoal() {
@@ -110,9 +115,10 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         collectionView.dataSource = self
         collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
-    
-    //MARK: Delegates
-    //MARK: - GoalFactoryDelegate
+}
+
+//MARK: - Extension GoalFactoryDelegate
+extension GoalsViewController: GoalFactoryDelegate {
     func didShowLastGoal(index: Int) {
         self.index = index
         let indexTotal = goalFactory.goalsCount
@@ -129,7 +135,10 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         show(convert(goal: goal))
     }
-    
+}
+
+//MARK: - Extension CollectionView
+extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //MARK: - Collection View delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return goalFactory.statistic?.days?.count ?? 0
@@ -160,7 +169,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let description = goalFactory.goals[index]?.days[indexPath.item].description else { return }
@@ -177,7 +186,7 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.present(alert, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, 
+    func collectionView(_ collectionView: UICollectionView,
                         contextMenuConfigurationForItemAt indexPath: IndexPath,
                         point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
@@ -201,9 +210,9 @@ class GoalsViewController: UIViewController, UICollectionViewDelegate, UICollect
                 formDescriptionDayController.modalPresentationStyle = .fullScreen
                 self.present(formDescriptionDayController, animated: false, completion: nil)
             }
-
+            
             return UIMenu(title: "",
-                          image: nil, 
+                          image: nil,
                           identifier: nil,
                           options: UIMenu.Options.displayInline,
                           children: [isDone, isNotdone, writeResult])
