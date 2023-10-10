@@ -26,9 +26,9 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     var indexPath = 0
     
     //MARK: - Privates property
-    private let goalFactory = GoalFactory.instance
     private var presenter: GoalsPresenter!
-
+    private let goalFactory = GoalFactory.instance
+    
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,19 +42,7 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     
     //MARK: - IB Actions methods
     @IBAction func onDeleteGoal(_ sender: Any) {
-        
-        if presenter.index == goalFactory.goalsCount - 1 && presenter.index != 0{
-            presenter.index -= 1
-            deleteGoal()
-            presenter.goalFactory.requestNextGoal(index: presenter.index)
-        } else if goalFactory.goalsCount > 1 {
-            deleteGoal()
-            presenter.goalFactory.requestNextGoal(index: presenter.index)
-        } else {
-            return
-        }
-        
-        collectionView.reloadData()
+        presenter.deleteGoal()
     }
     
     @IBAction func onRightButton(_ sender: Any) {
@@ -77,12 +65,7 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
 extension GoalsViewController {
     
     //MARK: Privates Methods
-    private func deleteGoal() {
-        if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
-            goalFactory.statistic?.goals?[presenter.index].days.removeAll()
-            goalFactory.statistic?.goals?.remove(at: presenter.index)
-        }
-    }
+
     
     private func displaySettingsGoals() {
         startLabel.isHidden = true

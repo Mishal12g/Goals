@@ -21,6 +21,30 @@ final class GoalsPresenter {
 }
 
 extension GoalsPresenter: GoalFactoryDelegate {
+    
+    func deleteGoal() {
+        if index == goalFactory.goalsCount - 1 && index != 0{
+            index -= 1
+            remove()
+            goalFactory.requestNextGoal(index: index)
+        } else if goalFactory.goalsCount > 1 {
+            remove()
+            goalFactory.requestNextGoal(index: index)
+        } else {
+            return
+        }
+        
+        viewController?.reloadData()
+    }
+    
+    private func remove() {
+        if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
+            goalFactory.statistic?.goals?[index].days.removeAll()
+            goalFactory.statistic?.goals?.remove(at: index)
+        }
+    }
+
+    
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
                                       description: goal.description ?? "",
