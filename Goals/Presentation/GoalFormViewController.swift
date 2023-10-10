@@ -84,7 +84,6 @@ extension GoalFormViewController {
     }
     
     private func addDays(_ num: Int) -> [Day] {
-//        viewControllerDelegate?.startLabel.isHidden = true
         var array: [Day] = []
         for _ in 1...num {
             array.append(Day())

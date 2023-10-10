@@ -15,6 +15,7 @@ class FormDescriptionDayViewController: UIViewController {
     
     //MARK: Privates properties
     private let goalFactory = GoalFactory.instance
+    private var index: Int = 0
     
     //MARK: Overrides methods
     override func viewDidLoad() {
@@ -23,7 +24,7 @@ class FormDescriptionDayViewController: UIViewController {
         keyboard()
         viewSetingsTextField()
     }
-    
+
     //MARK: IB actions methods
     @IBAction func but(_ sender: Any) {
         guard var text = textField.text else { return }
@@ -40,11 +41,11 @@ class FormDescriptionDayViewController: UIViewController {
 }
 
 extension FormDescriptionDayViewController {
-    //MARK: Privates methods
+    //MARK: - Privates methods
     func addDescription(_ str: String) {
 //        guard let statistic = goalFactory.statistic,
-//              let index = goalFactory.viewControllerDelegate?.index,
-//              let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
+//              let index = delegate?.index,
+//              let indexPath = delegate?.indexPath else { return }
 //        
 //        statistic.goals?[index].days[indexPath].description = str
     }

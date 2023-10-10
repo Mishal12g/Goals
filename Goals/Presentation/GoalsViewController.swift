@@ -10,7 +10,7 @@ import UIKit
 protocol GoalsViewControllerProtocol {
     func changeGoalsIndexLabel(_ str: String?)
     func reloadData()
-    func changeGoalNameLabel(_ str: String) 
+    func changeGoalNameLabel(_ str: String)
 }
 
 class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
@@ -54,10 +54,8 @@ class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
 extension GoalsViewController {
     
     //MARK: Privates Methods
-
-    
     private func displaySettingsGoals() {
-        startLabel.isHidden = true
+        isHidenStartLabel(hide: true)
         startLabel.text = "Нет целей.."
         startLabel.font = UIFont.systemFont(ofSize: 30)
         if goalFactory.goalsCount != 0 {
@@ -80,6 +78,10 @@ extension GoalsViewController {
         collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
     
+    func isHidenStartLabel(hide: Bool) {
+        startLabel.isHidden = hide
+    }
+    
     func reloadData() {
         collectionView.reloadData()
     }
@@ -98,9 +100,6 @@ extension GoalsViewController {
     }
 }
 
-//MARK: - Extension GoalFactoryDelegate
-
-
 //MARK: - Extension CollectionView
 extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     //MARK: - Collection View delegate
@@ -111,6 +110,10 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? LabelCollectionViewCell else {
             return LabelCollectionViewCell()
+        }
+                
+        if !startLabel.isHidden {
+            isHidenStartLabel(hide: true)
         }
         
         cell.label.font = .boldSystemFont(ofSize: 40)
