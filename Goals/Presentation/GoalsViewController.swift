@@ -7,7 +7,13 @@
 
 import UIKit
 
-class GoalsViewController: UIViewController {
+protocol GoalsViewControllerProtocol {
+    func changeGoalsIndexLabel(_ str: String?)
+    func reloadData()
+    func changeGoalNameLabel(_ str: String) 
+}
+
+class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     
     //MARK: - IB Outlets
     @IBOutlet weak var startLabel: UILabel!
@@ -16,18 +22,18 @@ class GoalsViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var addButton: UIButton!
     
-    //MARK: - Public methods
-    var index = 0
+    //MARK: - Public property
     var indexPath = 0
     
     //MARK: - Privates property
     private let goalFactory = GoalFactory.instance
+    private var presenter: GoalsPresenter!
 
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = GoalsPresenter(viewController: self)
         addButton.titleLabel?.text = nil
-        goalFactory.viewControllerDelegate = self
         goalNameLabel.text = nil
         goalsIndexLabel.text = nil
         displaySettingsGoals()
@@ -36,13 +42,14 @@ class GoalsViewController: UIViewController {
     
     //MARK: - IB Actions methods
     @IBAction func onDeleteGoal(_ sender: Any) {
-        if index == goalFactory.goalsCount - 1 && index != 0{
-            index -= 1
+        
+        if presenter.index == goalFactory.goalsCount - 1 && presenter.index != 0{
+            presenter.index -= 1
             deleteGoal()
-            goalFactory.requestNextGoal(index: index)
+            presenter.goalFactory.requestNextGoal(index: presenter.index)
         } else if goalFactory.goalsCount > 1 {
             deleteGoal()
-            goalFactory.requestNextGoal(index: index)
+            presenter.goalFactory.requestNextGoal(index: presenter.index)
         } else {
             return
         }
@@ -52,16 +59,16 @@ class GoalsViewController: UIViewController {
     
     @IBAction func onRightButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
-            index = min(index + 1, goalFactory.goalsCount - 1)
-            goalFactory.requestNextGoal(index: index)
+            presenter.index = min(presenter.index + 1, goalFactory.goalsCount - 1)
+            goalFactory.requestNextGoal(index: presenter.index)
             collectionView.reloadData()
         }
     }
     
     @IBAction func onLeftButton(_ sender: Any) {
         if goalFactory.goalsCount != 0 {
-            index = max(index - 1, 0)
-            goalFactory.requestNextGoal(index: index)
+            presenter.index = max(presenter.index - 1, 0)
+            goalFactory.requestNextGoal(index: presenter.index)
             collectionView.reloadData()
         }
     }
@@ -72,24 +79,9 @@ extension GoalsViewController {
     //MARK: Privates Methods
     private func deleteGoal() {
         if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
-            goalFactory.statistic?.goals?[index].days.removeAll()
-            goalFactory.statistic?.goals?.remove(at: index)
+            goalFactory.statistic?.goals?[presenter.index].days.removeAll()
+            goalFactory.statistic?.goals?.remove(at: presenter.index)
         }
-    }
-    
-    private func convert(goal: Goal) -> GoalModelView {
-        let modelView = GoalModelView(name: goal.name,
-                                      description: goal.description ?? "",
-                                      days: goal.days)
-        
-        return modelView
-    }
-    
-    private func show(_ modelView: GoalModelView) {
-        let indexTotal = goalFactory.goalsCount
-        goalsIndexLabel.text = "\(index+1)/\(indexTotal)"
-        goalNameLabel.text = modelView.name
-        goalFactory.statistic?.days = modelView.days
     }
     
     private func displaySettingsGoals() {
@@ -97,7 +89,7 @@ extension GoalsViewController {
         startLabel.text = "Нет целей.."
         startLabel.font = UIFont.systemFont(ofSize: 30)
         if goalFactory.goalsCount != 0 {
-            goalFactory.requestNextGoal(index: index)
+            goalFactory.requestNextGoal(index: presenter.index)
         } else {
             startLabel.isHidden = false
         }
@@ -115,27 +107,27 @@ extension GoalsViewController {
         collectionView.dataSource = self
         collectionView.register(LabelCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
-}
-
-//MARK: - Extension GoalFactoryDelegate
-extension GoalsViewController: GoalFactoryDelegate {
-    func didShowLastGoal(index: Int) {
-        self.index = index
-        let indexTotal = goalFactory.goalsCount
-        goalFactory.requestNextGoal(index: self.index)
-        goalsIndexLabel.text = "\(self.index + 1)/\(indexTotal)"
+    
+    func reloadData() {
         collectionView.reloadData()
     }
     
-    func didReceiveGoal(goal: Goal?) {
-        guard let goal = goal else {
-            goalNameLabel.text = "Нет Целей"
+    func changeGoalsIndexLabel(_ str: String?) {
+        guard let str = str else {
+            goalsIndexLabel.text = "Нет Целей"
             return
         }
         
-        show(convert(goal: goal))
+        goalsIndexLabel.text = str
+    }
+    
+    func changeGoalNameLabel(_ str: String) {
+        goalNameLabel.text = str
     }
 }
+
+//MARK: - Extension GoalFactoryDelegate
+
 
 //MARK: - Extension CollectionView
 extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -172,7 +164,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let description = goalFactory.goals[index]?.days[indexPath.item].description else { return }
+        guard let description = goalFactory.goals[presenter.index]?.days[indexPath.item].description else { return }
         
         let alert = UIAlertController(title: "Результат \(indexPath.item + 1) дня ",
                                       message: description,
@@ -192,14 +184,14 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             
             let isDone = UIAction(title: "Выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isDone
-                self.goalFactory.requestNextGoal(index: self.index)
+                self.goalFactory.statistic?.goals?[self.presenter.index].days[indexPath.item].state = .isDone
+                self.goalFactory.requestNextGoal(index: self.presenter.index)
                 collectionView.reloadData()
             }
             
             let isNotdone = UIAction(title: "Не выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.goalFactory.statistic?.goals?[self.index].days[indexPath.item].state = .isNotDone
-                self.goalFactory.requestNextGoal(index:self.index)
+                self.goalFactory.statistic?.goals?[self.presenter.index].days[indexPath.item].state = .isNotDone
+                self.goalFactory.requestNextGoal(index:self.presenter.index)
                 collectionView.reloadData()
             }
             

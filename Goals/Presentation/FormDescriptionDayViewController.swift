@@ -42,11 +42,11 @@ class FormDescriptionDayViewController: UIViewController {
 extension FormDescriptionDayViewController {
     //MARK: Privates methods
     func addDescription(_ str: String) {
-        guard let statistic = goalFactory.statistic,
-              let index = goalFactory.viewControllerDelegate?.index,
-              let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
-        
-        statistic.goals?[index].days[indexPath].description = str
+//        guard let statistic = goalFactory.statistic,
+//              let index = goalFactory.viewControllerDelegate?.index,
+//              let indexPath = goalFactory.viewControllerDelegate?.indexPath else { return }
+//        
+//        statistic.goals?[index].days[indexPath].description = str
     }
     
     //MARK: Keyboard methods show/hide
