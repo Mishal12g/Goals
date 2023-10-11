@@ -68,7 +68,6 @@ extension GoalsPresenter {
         }
     }
     
-    
     private func convert(goal: Goal) -> GoalModelView {
         let modelView = GoalModelView(name: goal.name,
                                       description: goal.description ?? "",

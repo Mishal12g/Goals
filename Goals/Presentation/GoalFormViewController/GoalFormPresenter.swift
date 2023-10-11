@@ -21,6 +21,7 @@ final class GoalFormPresenter {
     //MARK: - Public methods
     func addNewGoal(name goalString: String, days countDays: Int) {
         guard let dataSource = goalFactory.dataSource else { return }
+        if countDays > 500 || countDays <= 0 { return }
         dataSource.name = goalString
         dataSource.days = addDays(countDays)
         let newGoal = Goal(name: dataSource.name ?? "", description: nil, days: dataSource.days ?? [] )
