@@ -141,16 +141,13 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         guard let description = goalFactory.goals[presenter.index]?.days[indexPath.item].description else { return }
         
-        let alert = UIAlertController(title: "Результат \(indexPath.item + 1) дня ",
-                                      message: description,
-                                      preferredStyle: .alert)
+        let alertModel = AlertViewModel(title: "Результат \(indexPath.item + 1) дня ",
+                                        message: description,
+                                        buttonTitle: "Выйти"){}
         
-        let action = UIAlertAction(title: "Выйти", style: .default) {_ in
-            
-        }
+        let alertPresenter = AlertPresenter(alertModel: alertModel, delegate: self)
         
-        alert.addAction(action)
-        self.present(alert, animated: true)
+        alertPresenter.showAlert()
     }
     
     func collectionView(_ collectionView: UICollectionView,
