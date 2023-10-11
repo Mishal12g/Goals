@@ -8,16 +8,15 @@
 import UIKit
 
 class FormDescriptionDayViewController: UIViewController {
+    
     //MARK: - IB Outlets
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var buttonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textField: UITextView!
-
+    
     //MARK: - Privates properties
-    private let goalFactory = GoalFactory.instance
-    private var indexPath = IndexPath()
-    private var index: Int = 0
-        
+    private var presenter: FormDescriptionDayPresenter!
+    
     //MARK: - Overrides methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +24,7 @@ class FormDescriptionDayViewController: UIViewController {
         keyboard()
         viewSetingsTextField()
     }
-
+    
     //MARK: - IB actions methods
     @IBAction func but(_ sender: Any) {
         guard var text = textField.text else { return }
@@ -34,27 +33,19 @@ class FormDescriptionDayViewController: UIViewController {
         
         if !text.isEmpty {
             let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-            addDescription(trimmedText)
+            presenter.addDescription(trimmedText)
         }
         
         dismiss(animated: false, completion: nil)
     }
+    
+    //MARK: Public methods
+    func getIndex(index: Int, indexPath: IndexPath) {
+        presenter = FormDescriptionDayPresenter(indexPath: indexPath, index: index)
+    }
 }
 
 extension FormDescriptionDayViewController {
-    
-    //MARK: - Public methods
-    func getIndex(index: Int, indexPath: IndexPath) {
-        self.index = index
-        self.indexPath = indexPath
-    }
-    
-    //MARK: - Privates methods
-    func addDescription(_ str: String) {
-        guard let statistic = goalFactory.statistic else { return }
-
-        statistic.goals?[index].days[indexPath.item].description = str
-    }
     
     //MARK: - Keyboard methods show/hide
     @objc private func keyboardWillShow(_ notification: Notification) {
@@ -75,8 +66,14 @@ extension FormDescriptionDayViewController {
     }
     
     private func keyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self, 
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     private func viewSetingsTextField() {
