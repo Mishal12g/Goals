@@ -70,9 +70,9 @@ extension GoalsViewController {
     //MARK: - Setup collection view
     private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: collectionView.frame.size.width/3.5,
-                                 height: collectionView.frame.size.width/3.5)
-        layout.sectionInset = UIEdgeInsets(top: 95, left: 0, bottom: 0, right: 0)
+        layout.itemSize = CGSize(width: collectionView.frame.size.width/3.4,
+                                 height: collectionView.frame.size.width/3.4)
+        layout.sectionInset = UIEdgeInsets(top: 100, left: 10, bottom: 10, right: 10)
         
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
@@ -130,7 +130,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         cell.label.text = "\(indexPath.row + 1)"
-        cell.layer.cornerRadius = 10
+        cell.layer.cornerRadius = 5
         
         return cell
     }

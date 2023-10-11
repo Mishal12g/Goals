@@ -42,21 +42,23 @@ extension GoalsPresenter {
     }
     
     func deleteGoal() {
-        if index == goalFactory.goalsCount - 1 && index != 0{
-            remove()
-            index -= 1
-            goalFactory.requestNextGoal(index: index)
-        } else if goalFactory.goalsCount - 1 == 0 {
-            remove()
-            viewController?.changeGoalsIndexLabel(nil)
-            viewController?.changeGoalNameLabel("")
-            viewController?.isHidenStartLabel(hide: false)
-        } else {
-            remove()
-            goalFactory.requestNextGoal(index: index)
+        if goalFactory.goalsCount != 0 {
+            if index == goalFactory.goalsCount - 1 && index != 0{
+                remove()
+                index -= 1
+                goalFactory.requestNextGoal(index: index)
+            } else if goalFactory.goalsCount - 1 == 0 {
+                remove()
+                viewController?.changeGoalsIndexLabel(nil)
+                viewController?.changeGoalNameLabel("")
+                viewController?.isHidenStartLabel(hide: false)
+            } else {
+                remove()
+                goalFactory.requestNextGoal(index: index)
+            }
+            
+            viewController?.reloadData()
         }
-        
-        viewController?.reloadData()
     }
     
     //MARK: - Privates methods
