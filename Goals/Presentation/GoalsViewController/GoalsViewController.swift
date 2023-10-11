@@ -11,6 +11,7 @@ protocol GoalsViewControllerProtocol {
     func changeGoalsIndexLabel(_ str: String?)
     func reloadData()
     func changeGoalNameLabel(_ str: String)
+    func isHidenStartLabel(hide: Bool)
 }
 
 class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
@@ -87,11 +88,6 @@ extension GoalsViewController {
     }
     
     func changeGoalsIndexLabel(_ str: String?) {
-        guard let str = str else {
-            goalsIndexLabel.text = "Нет Целей"
-            return
-        }
-        
         goalsIndexLabel.text = str
     }
     
@@ -104,6 +100,7 @@ extension GoalsViewController {
 extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return goalFactory.dataSource?.days?.count ?? 0
     }
     
