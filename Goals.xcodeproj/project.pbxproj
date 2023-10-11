@@ -59,6 +59,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8761AC462AD6907D000F3A49 /* GoalsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				87DE1E9D2ABDB90400B539CB /* GoalsViewController.swift */,
+				871240582AD59B1B0046538C /* GoalsPresenter.swift */,
+			);
+			path = GoalsViewController;
+			sourceTree = "<group>";
+		};
+		8761AC482AD690A4000F3A49 /* GoalFormViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
+				8761AC422AD689F0000F3A49 /* GoalFormPresenter.swift */,
+			);
+			path = GoalFormViewController;
+			sourceTree = "<group>";
+		};
+		8761AC492AD690BE000F3A49 /* FormDescriptionDayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */,
+				8761AC442AD68C9D000F3A49 /* FormDescriptionDayPresenter.swift */,
+			);
+			path = FormDescriptionDayViewController;
+			sourceTree = "<group>";
+		};
 		876969B62AC7011F00EE868A /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -71,12 +98,9 @@
 			isa = PBXGroup;
 			children = (
 				87DE1E9F2ABDB90400B539CB /* Main.storyboard */,
-				87DE1E9D2ABDB90400B539CB /* GoalsViewController.swift */,
-				871240582AD59B1B0046538C /* GoalsPresenter.swift */,
-				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
-				8761AC422AD689F0000F3A49 /* GoalFormPresenter.swift */,
-				8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */,
-				8761AC442AD68C9D000F3A49 /* FormDescriptionDayPresenter.swift */,
+				8761AC462AD6907D000F3A49 /* GoalsViewController */,
+				8761AC482AD690A4000F3A49 /* GoalFormViewController */,
+				8761AC492AD690BE000F3A49 /* FormDescriptionDayViewController */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
