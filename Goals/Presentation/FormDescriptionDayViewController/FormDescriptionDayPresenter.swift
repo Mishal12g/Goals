@@ -22,8 +22,8 @@ final class FormDescriptionDayPresenter {
     
     //MARK: - Privates methods
     func addDescription(_ str: String) {
-        guard let statistic = goalFactory.statistic else { return }
+        guard let dataSource = goalFactory.dataSource else { return }
 
-        statistic.goals?[index].days[indexPath.item].description = str
+        dataSource.goals?[index].days[indexPath.item].description = str
     }
 }

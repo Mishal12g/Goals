@@ -102,9 +102,9 @@ extension GoalsViewController {
 
 //MARK: - Extension CollectionView
 extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    //MARK: - Collection View delegate
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return goalFactory.statistic?.days?.count ?? 0
+        return goalFactory.dataSource?.days?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,7 +118,7 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         
         cell.label.font = .boldSystemFont(ofSize: 40)
         
-        switch goalFactory.statistic?.days?[indexPath.item].state {
+        switch goalFactory.dataSource?.days?[indexPath.item].state {
         case .isNotDone:
             cell.backgroundColor = .red
         case .isDone:
@@ -156,13 +156,13 @@ extension GoalsViewController: UICollectionViewDelegate, UICollectionViewDataSou
         let config = UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
             
             let isDone = UIAction(title: "Выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.goalFactory.statistic?.goals?[self.presenter.index].days[indexPath.item].state = .isDone
+                self.goalFactory.dataSource?.goals?[self.presenter.index].days[indexPath.item].state = .isDone
                 self.goalFactory.requestNextGoal(index: self.presenter.index)
                 collectionView.reloadData()
             }
             
             let isNotdone = UIAction(title: "Не выполнена", identifier: nil, discoverabilityTitle: nil, state: .off) { _ in
-                self.goalFactory.statistic?.goals?[self.presenter.index].days[indexPath.item].state = .isNotDone
+                self.goalFactory.dataSource?.goals?[self.presenter.index].days[indexPath.item].state = .isNotDone
                 self.goalFactory.requestNextGoal(index:self.presenter.index)
                 collectionView.reloadData()
             }
