@@ -73,7 +73,6 @@ final class GoalFormViewController: UIViewController {
 extension GoalFormViewController {
     
     //MARK: - Privates Methods
-    
     private func initSetup() {
         goalLabel.text = "Цель"
         goalLabel.font = UIFont.boldSystemFont(ofSize: 25)

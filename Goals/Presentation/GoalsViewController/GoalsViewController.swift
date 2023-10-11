@@ -17,6 +17,7 @@ protocol GoalsViewControllerProtocol {
 class GoalsViewController: UIViewController, GoalsViewControllerProtocol{
     
     //MARK: - IB Outlets
+
     @IBOutlet weak var startLabel: UILabel!
     @IBOutlet weak var goalsIndexLabel: UILabel!
     @IBOutlet weak var goalNameLabel: UILabel!
@@ -71,7 +72,7 @@ extension GoalsViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: collectionView.frame.size.width/3.5,
                                  height: collectionView.frame.size.width/3.5)
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 95, left: 0, bottom: 0, right: 0)
         
         collectionView.collectionViewLayout = layout
         collectionView.delegate = self
