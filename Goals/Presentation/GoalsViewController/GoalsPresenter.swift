@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class GoalsPresenter {
     //MARK: - Public properties
@@ -42,23 +43,37 @@ extension GoalsPresenter {
     }
     
     func deleteGoal() {
-        if goalFactory.goalsCount != 0 {
-            if index == goalFactory.goalsCount - 1 && index != 0{
-                remove()
-                index -= 1
-                goalFactory.requestNextGoal(index: index)
-            } else if goalFactory.goalsCount - 1 == 0 {
-                remove()
-                viewController?.changeGoalsIndexLabel(nil)
-                viewController?.changeGoalNameLabel("")
-                viewController?.isHidenStartLabel(hide: false)
-            } else {
-                remove()
-                goalFactory.requestNextGoal(index: index)
-            }
+        if goalFactory.goalsCount == 0 { return }
+        let message = "Вы действительно хотите удалить цель <\(String(describing: goalFactory.goals[index]?.name ?? ""))>?"
+        let alertModel = AlertViewModel(title: "Удалить",
+                                        message: message,
+                                        buttonTitle: "Да",
+                                        buttonTitleTwo: "Отмена") { [weak self] in
+            guard let self = self else { return }
             
-            viewController?.reloadData()
+            if self.goalFactory.goalsCount != 0 {
+                if self.index == self.goalFactory.goalsCount - 1 && self.index != 0{
+                    self.remove()
+                    self.index -= 1
+                    self.goalFactory.requestNextGoal(index: index)
+                } else if self.goalFactory.goalsCount - 1 == 0 {
+                    self.remove()
+                    self.viewController?.changeGoalsIndexLabel(nil)
+                    self.viewController?.changeGoalNameLabel("")
+                    self.viewController?.isHidenStartLabel(hide: false)
+                } else {
+                    self.remove()
+                    self.goalFactory.requestNextGoal(index: index)
+                }
+                
+                self.viewController?.reloadData()
+            }
         }
+        
+        guard let viewController = viewController else { return }
+        let alert = AlertPresenter(alertModel: alertModel, delegate: viewController )
+        
+        alert.showAlertTwoButtons()
     }
     
     //MARK: - Privates methods

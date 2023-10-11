@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GoalsViewControllerProtocol {
+protocol GoalsViewControllerProtocol: UIViewController {
     func changeGoalsIndexLabel(_ str: String?)
     func reloadData()
     func changeGoalNameLabel(_ str: String)

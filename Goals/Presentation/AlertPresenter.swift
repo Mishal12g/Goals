@@ -10,6 +10,7 @@ import UIKit
 final class AlertPresenter {
     var delegate: UIViewController?
     var alertModel: AlertViewModel
+    var alert = UIAlertController()
     
     init(alertModel: AlertViewModel, delegate: UIViewController) {
         self.alertModel = alertModel
@@ -17,7 +18,7 @@ final class AlertPresenter {
     }
     
     func showAlert() {
-        let alert = UIAlertController(title: alertModel.title ,
+        alert = UIAlertController(title: alertModel.title ,
                                       message: alertModel.message,
                                       preferredStyle: .alert)
         
@@ -25,6 +26,23 @@ final class AlertPresenter {
             self.alertModel.complition()
         }
         
+        alert.addAction(action)
+        self.delegate?.present(alert, animated: true)
+    }
+    
+    func showAlertTwoButtons() {
+        alert = UIAlertController(title: alertModel.title ,
+                                      message: alertModel.message,
+                                      preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: alertModel.buttonTitle, style: .default) {_ in
+            self.alertModel.complition()
+        }
+        
+        let actionTwo = UIAlertAction(title: alertModel.buttonTitleTwo, style: .default) {_ in
+        }
+        
+        alert.addAction(actionTwo)
         alert.addAction(action)
         self.delegate?.present(alert, animated: true)
     }
