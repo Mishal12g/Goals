@@ -11,6 +11,7 @@
 		870708E42AC2E32300B8D016 /* GoalModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870708E32AC2E32300B8D016 /* GoalModelView.swift */; };
 		871240592AD59B1B0046538C /* GoalsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871240582AD59B1B0046538C /* GoalsPresenter.swift */; };
 		8729A0972AD04FAC003E200C /* FormDescriptionDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */; };
+		8761AC432AD689F0000F3A49 /* GoalFormPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8761AC422AD689F0000F3A49 /* GoalFormPresenter.swift */; };
 		876969B82AC7015B00EE868A /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */; };
 		877DD1722ACD98770032798F /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877DD1712ACD98770032798F /* StatisticService.swift */; };
 		8795938B2AC597B200A46259 /* GoalFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8795938A2AC597B200A46259 /* GoalFormViewController.swift */; };
@@ -29,6 +30,7 @@
 		870708E32AC2E32300B8D016 /* GoalModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalModelView.swift; sourceTree = "<group>"; };
 		871240582AD59B1B0046538C /* GoalsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsPresenter.swift; sourceTree = "<group>"; };
 		8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDescriptionDayViewController.swift; sourceTree = "<group>"; };
+		8761AC422AD689F0000F3A49 /* GoalFormPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormPresenter.swift; sourceTree = "<group>"; };
 		876969B72AC7015B00EE868A /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		877DD1712ACD98770032798F /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		8795938A2AC597B200A46259 /* GoalFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalFormViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				87DE1E9D2ABDB90400B539CB /* GoalsViewController.swift */,
 				871240582AD59B1B0046538C /* GoalsPresenter.swift */,
 				8795938A2AC597B200A46259 /* GoalFormViewController.swift */,
+				8761AC422AD689F0000F3A49 /* GoalFormPresenter.swift */,
 				8729A0962AD04FAC003E200C /* FormDescriptionDayViewController.swift */,
 			);
 			path = Presentation;
@@ -206,6 +209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8729A0972AD04FAC003E200C /* FormDescriptionDayViewController.swift in Sources */,
+				8761AC432AD689F0000F3A49 /* GoalFormPresenter.swift in Sources */,
 				871240592AD59B1B0046538C /* GoalsPresenter.swift in Sources */,
 				87DE1E9E2ABDB90400B539CB /* GoalsViewController.swift in Sources */,
 				877DD1722ACD98770032798F /* StatisticService.swift in Sources */,

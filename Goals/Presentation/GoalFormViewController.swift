@@ -15,13 +15,14 @@ final class GoalFormViewController: UIViewController {
     @IBOutlet weak var dayFormField: UITextField!
     @IBOutlet weak var doneButton: UIButton!
     
-    private let goalFactory = GoalFactory.instance
-    var viewControllerDelegate: GoalFactoryDelegate?
+    //MARK: - Privates methods
+    private var presenter: GoalFormPresenter!
     
+        
     //MARK: - Overrides Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllerDelegate = goalFactory.viewControllerDelegate
+        presenter = GoalFormPresenter()
         validationBoarderGoalTextField(false)
         validationBoarderDayTextField(false)
         initSetup()
@@ -61,7 +62,7 @@ final class GoalFormViewController: UIViewController {
             
             guard let numDays = dayFormField.text else { return }
             guard let text = goalFormField.text else { return }
-            addNewGoal(name: text,
+            presenter.addNewGoal(name: text,
                        days: Int(numDays) ?? 0)
             
             dismiss(animated: true, completion: nil)
@@ -72,24 +73,6 @@ final class GoalFormViewController: UIViewController {
 extension GoalFormViewController {
     
     //MARK: - Privates Methods
-    private func addNewGoal(name goalString: String, days countDays: Int) {
-        guard let statistic = goalFactory.statistic else { return }
-        statistic.name = goalString
-        statistic.days = addDays(countDays)
-        let newGoal = Goal(name: statistic.name ?? "", description: nil, days: statistic.days ?? [] )
-        
-        statistic.store(goal: newGoal)
-        
-        viewControllerDelegate?.didShowLastGoal(index: goalFactory.goalsCount - 1)
-    }
-    
-    private func addDays(_ num: Int) -> [Day] {
-        var array: [Day] = []
-        for _ in 1...num {
-            array.append(Day())
-        }
-        return array
-    }
     
     private func initSetup() {
         goalLabel.text = "Цель"
