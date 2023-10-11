@@ -20,12 +20,12 @@ final class GoalFormPresenter {
     
     //MARK: - Public methods
     func addNewGoal(name goalString: String, days countDays: Int) {
-        guard let statistic = goalFactory.statistic else { return }
-        statistic.name = goalString
-        statistic.days = addDays(countDays)
-        let newGoal = Goal(name: statistic.name ?? "", description: nil, days: statistic.days ?? [] )
+        guard let dataSource = goalFactory.dataSource else { return }
+        dataSource.name = goalString
+        dataSource.days = addDays(countDays)
+        let newGoal = Goal(name: dataSource.name ?? "", description: nil, days: dataSource.days ?? [] )
         
-        statistic.store(goal: newGoal)
+        dataSource.store(goal: newGoal)
         
         viewControllerDelegate?.didShowLastGoal(index: goalFactory.goalsCount - 1)
     }

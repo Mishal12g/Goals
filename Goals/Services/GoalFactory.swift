@@ -9,15 +9,15 @@ import Foundation
 
 final class GoalFactory {
     //MARK: Public properties
-    let statistic: StatisticService?
+    let dataSource: DataSource?
     
     //MARK: Init
-    init(statistic: StatisticService?) {
-        self.statistic = statistic
+    init(statistic: DataSource?) {
+        self.dataSource = statistic
     }
     
     //MARK: - Public properties
-    static var instance: GoalFactory = GoalFactory(statistic: StatisticService())
+    static var instance: GoalFactory = GoalFactory(statistic: DataSource())
     var viewControllerDelegate: GoalFactoryDelegate?
     
     var goalsCount: Int {
@@ -28,7 +28,7 @@ final class GoalFactory {
     
     var goals: [Goal?] {
         get {
-            statistic?.goals ?? []
+            dataSource?.goals ?? []
         }
     }
     

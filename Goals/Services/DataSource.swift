@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class StatisticService {
+final class DataSource {
     
     var name: String? {
         get {

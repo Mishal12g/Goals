@@ -58,9 +58,9 @@ extension GoalsPresenter {
     
     //MARK: - Privates methods
     private func remove() {
-        if !(goalFactory.statistic?.goals?.isEmpty ?? false) {
-            goalFactory.statistic?.goals?[index].days.removeAll()
-            goalFactory.statistic?.goals?.remove(at: index)
+        if !(goalFactory.dataSource?.goals?.isEmpty ?? false) {
+            goalFactory.dataSource?.goals?[index].days.removeAll()
+            goalFactory.dataSource?.goals?.remove(at: index)
         }
     }
     
@@ -77,7 +77,7 @@ extension GoalsPresenter {
         let indexTotal = goalFactory.goalsCount
         viewController?.changeGoalsIndexLabel("\(index+1)/\(indexTotal)")
         viewController?.changeGoalNameLabel(modelView.name)
-        goalFactory.statistic?.days = modelView.days
+        goalFactory.dataSource?.days = modelView.days
     }
 }
 
